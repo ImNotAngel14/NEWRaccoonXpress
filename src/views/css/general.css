@@ -1,0 +1,95 @@
+/* general styles */
+/*
+    Paleta de colores:
+    #243642 oscuro
+    #387478 primario
+    #629584 secundario
+    #E2F1E7 claro
+
+    #F17974 error
+*/
+body
+{
+    background-color: #E2F1E7;
+}
+
+.error
+{
+    color: #F17974;
+    border: #F17974;
+}
+
+li.valid
+{
+    color: #198754;
+}
+
+.my-primary-color
+{
+    background-color: #387478;
+    color:white;
+    border:#387478;
+}
+
+.my-secondary-color
+{
+    background-color: #629584;
+    color: white;
+    border: #629584;
+}
+
+.my-primary
+{
+    background-color: #387478;
+    color:white;
+    border:#387478;
+}
+
+.my-primary:hover
+{
+    background-color: #8DB3B0;
+    color: white;
+}
+
+.my-primary:active
+{
+    background-color: #B8D2CC  !important;
+    color: white  !important;
+}
+
+.my-secondary
+{
+    background-color: #629584;
+    color: white;
+    border: #629584;
+}
+
+.my-secondary:hover
+{
+    background-color: #A2C3B6;
+    color: white;
+}
+
+.my-secondary:active {
+    background-color: #C2DACF  !important;
+    color: white  !important;
+}
+
+::placeholder
+{
+    color: #6c757d !important;
+    opacity: 1 !important;
+}
+
+.form-control, .form-select
+{
+    color: #6c757d !important;
+    opacity: 1 !important;
+}
+
+/* Navbar elements*/
+.navbar,.navbar-brand, .nav-link
+{
+    background-color: #3B3030;
+    color: white !important;
+}

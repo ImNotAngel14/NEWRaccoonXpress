@@ -11,7 +11,7 @@ CREATE TABLE `users`
     `gender` INT NOT NULL COMMENT 'Género del usuario',
     `birth_date` DATE NOT NULL COMMENT 'Fecha de nacimiento del usuario',
     `visibility` TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Visibilidad del perfil del usuario',
-    `active` TINYINT(1) NOT NULL DEFAULT 1 COMMENT 'Bandera de usuario activo'
+    `active` TINYINT(1) NOT NULL DEFAULT 1 COMMENT 'Bandera de usuario activo',
     `last_login_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP() COMMENT 'fecha del último ingreso al portal',
     `profile_image` BLOB COMMENT 'Imagen del perfil del usuario'  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

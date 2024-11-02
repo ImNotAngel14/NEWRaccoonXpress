@@ -19,13 +19,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const form = document.querySelector('.needs-validation')
-
-    form.addEventListener('submit', event => {
+    let errorTOTAL;
+    form.addEventListener('submit', async function(event) {
         if (!form.checkValidity()) {
             event.preventDefault();
             event.stopPropagation();
         }
+        // Recoge todos los datos del formulario automáticamente
+        const formData = new FormData(this);
+        try {
+            // Envía la solicitud a la API
+            const response = await fetch("http://localhost/NewRaccoonXpress/api/usersAPI.php?action=register", {
+                method: "POST",
+                body: formData
+            });
 
+            alert("breakpoint2");
+            const result = await response.json(); // Obtener respuesta en JSON
+            
+            alert("breakpoint3");
+            if (result.success) 
+            {
+                // Mostrar mensaje de éxito (puedes redirigir o mostrar un mensaje)
+                alert("¡Registro exitoso!");
+                console.log(result.message);
+            } 
+            else 
+            {
+                // Mostrar mensaje de error
+                alert("Fallo");
+                console.log(result);
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("breakpoint error");
+        }
         form.classList.add('was-validated');
     }, false);
 });

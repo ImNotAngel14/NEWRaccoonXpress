@@ -15,16 +15,16 @@
                     <h3>Iniciar sesión</h3>
                 </div>
                 <div class="card-body m-4">
-                    <form class="needs-validation" novalidate>
+                    <form method="post" action="/NEWRaccoonXpress/api/usersAPI.php?action=register" class="needs-validation" novalidate>
                         <div class="invalid-feedback my-3">Credenciales incorrectas.</div>
                         <!-- Username input -->
                         <div class="form-outline mb-3">
-                            <input type="text" id="id_username" class="form-control" placeholder="Username" required/>
+                            <input type="text" id="id_username" name="username" class="form-control" placeholder="Username" required/>
                             <div class="invalid-feedback">Ingrese un nombre de usuario con mínimo 3 caracteres.</div>
                         </div>
                         <!-- Password input -->
                         <div class="form-outline mb-3">
-                            <input type="password" id="id_password" class="form-control" placeholder="Password" required/>
+                            <input type="password" id="id_password" name="password" class="form-control" placeholder="Password" required/>
                             <div class="invalid-feedback">
                                 <p>La contraseña debe incluir:</p>
                                 <ul>

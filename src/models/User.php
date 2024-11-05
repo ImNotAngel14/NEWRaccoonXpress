@@ -1,5 +1,4 @@
 <?php
-// app/models/UserModel.php
 require_once '../config/Database.php';
 
 class User {
@@ -37,8 +36,7 @@ class User {
         $this->profile_image = $profile_image;
     }
 
-    public function registerUser
-    (
+    public function registerUser(
         $email = null,
         $username = null,
         $user_password = null,
@@ -49,17 +47,17 @@ class User {
         $birth_date = null
     )
     {
-        $sql = "CALL `new_raccoonxpress`.`sp_register`(?,?,?,?,?,?,?,?)";
+        $sql = "CALL `new_raccoonxpress`.`sp_register`(?,?,?,?,?,?,?,?);";
         try
         {
             $database = new Database();
-            $this->conn = $database.connect();
+            $this->conn = $database->connect();
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param(
                 "sssissis",
                 $email,
                 $username,
-                $user_pasword,
+                $user_password,
                 $user_role,
                 $first_name,
                 $last_name,
@@ -199,5 +197,5 @@ class User {
     public function setProfileImage($profile_image) {
         $this->profile_image = $profile_image;
     }
-
 }
+?>

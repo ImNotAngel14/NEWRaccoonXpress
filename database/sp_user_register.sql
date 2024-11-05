@@ -13,7 +13,8 @@ CREATE PROCEDURE `new_raccoonxpress`.`sp_register`
 )
 BEGIN
 	INSERT INTO `new_raccoonxpress`.`users` (
-        `email`, 
+        `email`,
+        `username`,
         `user_password`, 
         `user_role`, 
         `first_name`, 
@@ -23,6 +24,7 @@ BEGIN
     ) 
     VALUES (
         `p_email`,
+        `p_username`,
         `p_user_password`,
         `p_user_role`,
         `p_first_name`,

@@ -1,4 +1,4 @@
-// <?php
+<?php
    class Database {
       private $host = "localhost";  // Host de la base de datos
       private $db_name = "new_raccoonxpress";  // Nombre de la base de datos

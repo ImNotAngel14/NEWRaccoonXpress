@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE PROCEDURE `new_raccoonxpress`.`sp_register`
+CREATE PROCEDURE `sp_register`
 (
     IN `p_email` VARCHAR(64),
     IN `p_username` VARCHAR(32),
@@ -12,7 +12,7 @@ CREATE PROCEDURE `new_raccoonxpress`.`sp_register`
     IN `p_birth_date` DATE
 )
 BEGIN
-	INSERT INTO `new_raccoonxpress`.`users` (
+	INSERT INTO `users` (
         `email`,
         `username`,
         `user_password`, 

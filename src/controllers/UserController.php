@@ -19,6 +19,15 @@ class UserController
         $success = $user->registerUser($email, $username, $password, $user_role, $first_name, $last_name, $gender, $birth_date);
         echo json_encode(['status' => $username, 'success' => $success]);
     }
+
+    public function login()
+    {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $user = new User();
+        $found_user = $user->authUser($username, $password);
+        echo json_encode(['auth_status'=>$found_user]);
+    }
 }
 
 ?>

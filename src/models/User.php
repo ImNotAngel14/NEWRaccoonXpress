@@ -47,7 +47,11 @@ class User {
         $birth_date = null
     )
     {
-        $sql = "CALL `new_raccoonxpress`.`sp_register`(?,?,?,?,?,?,?,?);";
+        // Validaciones
+        // Validación contraseña
+        // Validación email
+        // Validación username
+        $sql = "CALL `sp_register`(?,?,?,?,?,?,?,?);";
         try
         {
             $database = new Database();
@@ -83,14 +87,19 @@ class User {
         return true;
     }
 
-    public function verifyLogin($username, $password) 
+    public function authUser($username, $password) 
     {
         // Verifica el login usando un procedimiento almacenado ficticio
-        $stmt = $this->conn->prepare("CALL sp_login(:username, :password)");
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':password', $password);
+        $sql = "CALL `sp_authLogin`(?, ?);";
+        $database = new Database();
+        $this->conn = $database->connect();
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ss", $username, $password);
         $stmt->execute();
-        return $stmt->rowCount() > 0;
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $foundUser = $row['found_user'];
+        return $foundUser;
     }
     // Getters
     public function getUserId() {

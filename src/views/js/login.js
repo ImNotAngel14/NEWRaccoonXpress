@@ -6,12 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
         validateUsername(usernameInput.value) ? usernameInput.setCustomValidity('') : usernameInput.setCustomValidity('Este campo debe tener al menos 3 caracteres.');
     });
 
-    // Validamos que sea un email correctamente estructurado
-    const emailInput = document.getElementById("email");
-    emailInput.addEventListener('input', () => {
-        validateEmail(emailInput.value) ? emailInput.setCustomValidity('') : emailInput.setCustomValidity('Ingrese una dirección de correo electrónico válida.');
-    });
-
     // Validamos los requisitos de contraseña
     const passwordInput = document.getElementById("password");
     passwordInput.addEventListener('input', () => {
@@ -24,27 +18,15 @@ document.addEventListener('DOMContentLoaded', () => {
         form.classList.add('was-validated');
         if (form.checkValidity())
         {
-            // Recoge todos los datos del formulario automáticamente
             const formData = new FormData(this);
             try {
-                // Envía la solicitud a la API
-                const response = await fetch("http://localhost/NewRaccoonXpress/api/usersAPI.php?action=register", {
+                const response = await fetch("http://localhost/NewRaccoonXpress/api/usersAPI.php?action=login", {
                     method: "POST",
                     body: formData
                 });
 
-                const result = await response.json(); // Obtener respuesta en JSON
-                
-                if (result.success) 
-                {
-                    // Mostrar mensaje de éxito (puedes redirigir o mostrar un mensaje)
-                    console.log(result);
-                } 
-                else 
-                {
-                    // Mostrar mensaje de error
-                    console.error(result);
-                }
+                const result = await response.json();
+                document.getElementById("auth_status_msg").classList.toggle("d-none", result.auth_status);
             } catch (error) {
                 console.error("Error:", error);
             }
@@ -98,13 +80,4 @@ function validatePassword(password)
     }
     // Si pasa todas las validaciones, la contraseña es válida
     return validPassword;
-}
-
-function validateEmail(email)
-{
-    // Expresión regular para validar un correo electrónico
-    var pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
-    // Utilizamos el método test de la expresión regular para verificar si la cadena coincide con el patrón
-    return pattern.test(email);
 }

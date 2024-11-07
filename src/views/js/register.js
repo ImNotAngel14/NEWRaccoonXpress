@@ -24,21 +24,18 @@ document.addEventListener('DOMContentLoaded', () => {
         form.classList.add('was-validated');
         if (form.checkValidity())
         {
-            // Recoge todos los datos del formulario automáticamente
             const formData = new FormData(this);
             try {
-                // Envía la solicitud a la API
                 const response = await fetch("http://localhost/NewRaccoonXpress/api/usersAPI.php?action=register", {
                     method: "POST",
                     body: formData
                 });
 
-                const result = await response.json(); // Obtener respuesta en JSON
+                const result = await response.json();
                 
                 if (result.success) 
                 {
-                    // Mostrar mensaje de éxito (puedes redirigir o mostrar un mensaje)
-                    console.log(result);
+                    window.location.href = 'login.html';
                 } 
                 else 
                 {
@@ -52,6 +49,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }, false);
 });
 
+function togglePassword() {
+    const passwordField = document.getElementById('password');
+    const toggleIcon = document.getElementById('toggleIcon');
+
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        toggleIcon.classList.remove('bi-eye-slash');
+        toggleIcon.classList.add('bi-eye');
+    } else {
+        passwordField.type = 'password';
+        toggleIcon.classList.remove('bi-eye');
+        toggleIcon.classList.add('bi-eye-slash');
+    }
+}
 
 function validateUsername(username)
 {

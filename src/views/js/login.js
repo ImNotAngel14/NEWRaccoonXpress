@@ -27,13 +27,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const result = await response.json();
                 document.getElementById("auth_status_msg").classList.toggle("d-none", result.auth_status);
+                if(result.auth_status)
+                {
+                    window.location.href = 'home.html';
+                }
+                else
+                {
+                    form.classList.remove('was-validated');
+                }
             } catch (error) {
                 console.error("Error:", error);
             }
         }        
     }, false);
+
+    document.getElementById('registerButton').addEventListener('click', function() {
+        window.location.href = 'register.html';
+    });
+
+    
 });
 
+
+function togglePassword() {
+    const passwordField = document.getElementById('password');
+    const toggleIcon = document.getElementById('toggleIcon');
+
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        toggleIcon.classList.remove('bi-eye-slash');
+        toggleIcon.classList.add('bi-eye');
+    } else {
+        passwordField.type = 'password';
+        toggleIcon.classList.remove('bi-eye');
+        toggleIcon.classList.add('bi-eye-slash');
+    }
+}
 
 function validateUsername(username)
 {

@@ -75,6 +75,24 @@ li.valid
     color: white  !important;
 }
 
+.my-outline-gray
+{
+    border-color: #DEE2E6 !important;
+    color: #6C757D !important;
+}
+
+.my-outline-gray:hover
+{
+    border-color: #DEE2E6 !important;
+    color: #6C757D !important;
+}
+
+.my-outline-gray:active
+{
+    border-color: #DEE2E6 !important;
+    color: #6C757D !important;
+}
+
 ::placeholder
 {
     color: #6c757d !important;
@@ -90,6 +108,6 @@ li.valid
 /* Navbar elements*/
 .navbar,.navbar-brand, .nav-link
 {
-    background-color: #3B3030;
+    background-color: #387478;
     color: white !important;
 }

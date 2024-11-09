@@ -12,7 +12,7 @@
     ?>
     <div class="container d-flex justify-content-center">
         <!-- Content -->
-        <div class="row justify-content-start align-items-center w-100 h-90">
+        <div class="row justify-content-start align-items-center w-100 h-90 p-4">
             The
         </div>
     </div>

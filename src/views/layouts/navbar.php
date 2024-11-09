@@ -39,10 +39,9 @@
                     <!-- Profile -->
                     <li class="nav-item dropdown d-flex justify-content-center">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="assets/no-profile-user.png" alt="Profile" height="25 rem">
+                            <img src="assets/no-profile-user.png" alt="Profile" class="m-2" height="25 rem">
                             Perfil
                         </a>
-
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="#">Perfil</a></li>
                             <li><a class="dropdown-item" href="#">Mensajes</a></li>

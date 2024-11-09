@@ -28,16 +28,16 @@
                 </li>
                 <!-- Search bar -->
                 <li class="nav-item col-lg-6 container-fluid align-self-center mx-0">
-                    <form class="d-flex" role="search">
+                    <form class="d-flex" role="search" method="get" action="search.php">
                         <div class="input-group">
-                            <input class="form-control" type="search" placeholder="Buscar..." aria-label="Search">
+                            <input class="form-control" type="search" placeholder="Buscar..." aria-label="Search" name='search'>
                             <button class="btn my-secondary " type="submit"><i class="bi bi-search"></i></button>
                         </div>
                     </form>
                 </li>
                 <div class="d-lg-flex ms-lg-auto align-items-center">
                     <!-- Profile -->
-                    <li class="nav-item dropdown d-flex justify-content-center d-none d-lg-block;">
+                    <li class="nav-item dropdown d-flex justify-content-center d-none d-lg-block">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="assets/no-profile-user.png" alt="Profile" class="m-2" style='height: 2rem; object-fit: contain;'>
                             Perfil

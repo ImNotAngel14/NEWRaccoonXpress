@@ -117,6 +117,7 @@ CREATE TABLE `reviews`
     `user_id` INT NOT NULL COMMENT 'Identificador del usuario creador de la reseña',
     `title` VARCHAR(32) NOT NULL COMMENT 'Titulo de la reseña',
     `review_body` VARCHAR(180) NOT NULL COMMENT 'Cuerpo de la reseña',
+    `rate` INT NOT NULL COMMENT 'Calificación del producto',
     `active` TINYINT(1) NOT NULL COMMENT 'Bandera de reseña activa',
     `created_at` DATETIME NOT NULL COMMENT 'Fecha y hora del envío del mensaje',
     CONSTRAINT `fk_reviews_user_id_users`

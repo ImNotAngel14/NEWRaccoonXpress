@@ -34,7 +34,7 @@ CREATE TABLE `categories`
 CREATE TABLE `products`
 (
     `product_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador de producto',
-    `product_name` VARCHAR(32) NOT NULL COMMENT 'Nombre del producto',
+    `product_name` VARCHAR(64) NOT NULL COMMENT 'Nombre del producto',
     `description` VARCHAR(160) NOT NULL COMMENT 'Descripción del producto',
     `quotable` TINYINT(1) NOT NULL COMMENT 'Bandera de producto cotizable',
     `price` DECIMAL(10,2) COMMENT 'Precio del producto',

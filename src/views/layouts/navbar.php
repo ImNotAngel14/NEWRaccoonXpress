@@ -11,7 +11,7 @@
             <a class="nav-link mx-2" href="#"><i class="bi bi-cart"></i></a>
         </div>
         <a class='navbar-brand d-flex justify-content-center' href='../index.php'>
-            <img src='assets/Imagotipo.png' alt='' height='30 rem'>
+            <img src='assets/Imagotipo.png' alt='' style='height: 3rem; object-fit: contain;'>
         </a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav container-fluid">
@@ -37,9 +37,9 @@
                 </li>
                 <div class="d-lg-flex ms-lg-auto align-items-center">
                     <!-- Profile -->
-                    <li class="nav-item dropdown d-flex justify-content-center">
+                    <li class="nav-item dropdown d-flex justify-content-center d-none d-lg-block;">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="assets/no-profile-user.png" alt="Profile" class="m-2" height="25 rem">
+                            <img src="assets/no-profile-user.png" alt="Profile" class="m-2" style='height: 2rem; object-fit: contain;'>
                             Perfil
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">

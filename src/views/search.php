@@ -14,16 +14,17 @@
         <div class="row mb-4 w-100 h-90">
             <!-- Content -->
             <div class="row "></div>
-                <h4>Busqueda: "<?php
-                    if(isset($_GET["search"]))
-                    {
-                        echo $_GET["search"];
-                    }
+                <h4>Busqueda: "
+                    <?php
+                        if(isset($_GET["search"]))
+                        {
+                            echo $_GET["search"];
+                        }
                     ?>"
                 </h4>
             </div>
             <div class="container-fluid d-flex">
-                <div class="col-2 me-4">
+                <div class="col-2 p-4">
                     <div class="card p-4">
                         <form method="get" action="search.php">
                             <!-- Price filter -->
@@ -57,7 +58,7 @@
                         </form> 
                     </div>                 
                 </div>
-                <div class="col-10">
+                <div class="col-10 p-4">
                     <?php
                         //if ($result->num_rows > 0) 
                         if(false)

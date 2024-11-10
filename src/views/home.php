@@ -8,16 +8,17 @@
 </head>
 <body>
     <?php
+    $user_role = 1;
     include __DIR__ . '/layouts/navbar.php';
     ?>
     <div class="container d-flex justify-content-center">
         <!-- Content -->
         <div class="row justify-content-start align-items-center w-100 h-90 p-4">
-            <!--Mejor votados-->
+            <!-- Mejor votados -->
             <div class="container" id="Rated">
                 <h3 style="text-align: center;">Mejor votados</h3>
                 <div class="row row-xs-cols-1 row-sm-cols-2 row-md-cols-3 row-cols-lg-4 g-4">
-                    <!--Productos-->
+                    <!-- Productos -->
                     <?php
                         $productId = 1;
                         $productName = 'Nintendo Lite Switch Lite 32GB Standard color turquesa 2017';
@@ -29,18 +30,18 @@
                     ?>
                 </div>
             </div>
-            <!--Recomendados-->
+            <!-- Recomendados -->
             <div class="container" id="Rated">
                 <h3 style="text-align: center;" class="mt-4">Recomendados</h3>
                 <div class="row row-xs-cols-1 row-sm-cols-2 row-md-cols-3 row-cols-lg-4 g-4">
-                    <!--Productos-->
+                    <!-- Productos -->
                 </div>
             </div>
             <!--Populares-->
             <div class="container" id="Rated">
                 <h3 style="text-align: center;" class="mt-4">Populares</h3>
                 <div class="row row-xs-cols-1 row-sm-cols-2 row-md-cols-3 row-cols-lg-4 g-4">
-                    <!--Productos-->
+                    <!-- Productos -->
                 </div>
             </div>
         </div>

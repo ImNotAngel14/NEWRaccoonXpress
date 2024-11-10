@@ -1,3 +1,42 @@
+<?php
+    $nav_buttons = ""; // Inicializar variable vacía para almacenar los botones
+
+    switch ($user_role) {
+        case 0: // Administrator
+            $nav_buttons = '
+                <li class="nav-item d-flex justify-content-center">
+                    <a class="nav-link" href="#">Gestionar usuarios</a>
+                </li>
+                <li class="nav-item d-flex justify-content-center">
+                    <a class="nav-link" href="#">Autorizar productos</a>
+                </li>';
+            break;
+        case 1: // Seller
+            $nav_buttons = '
+                <li class="nav-item d-flex justify-content-center">
+                    <a class="nav-link" href="#">Mis productos</a>
+                </li>
+                <li class="nav-item d-flex justify-content-center">
+                    <a class="nav-link" href="#">Consultas de ventas</a>
+                </li>';
+            break;
+        case 2: // Buyer
+            $nav_buttons = '
+                <li class="nav-item d-flex justify-content-center">
+                    <a class="nav-link" href="#">Mis pedidos</a>
+                </li>
+                <li class="nav-item d-flex justify-content-center">
+                    <a class="nav-link" href="#">Mis listas</a>
+                </li>
+                <li class="nav-item d-flex justify-content-center d-none d-lg-block">
+                    <a class="nav-link" href="#"><i class="bi bi-bell"></i></a>
+                </li>
+                <li class="nav-item d-flex justify-content-center d-none d-lg-block">
+                    <a class="nav-link" href="#"><i class="bi bi-cart"></i></a>
+                </li>';
+            break;
+    }
+?>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg h-10">
     <div class="container-fluid d-flex align-items-center">
@@ -8,7 +47,13 @@
         <div class="d-flex d-lg-none flex-fill justify-content-around">
             <a class="nav-link mx-2" href="#"><i class="bi bi-person-circle"></i></a>
             <a class="nav-link mx-2" href="#"><i class="bi bi-bell"></i></a>
-            <a class="nav-link mx-2" href="#"><i class="bi bi-cart"></i></a>
+            <?php 
+                if($user_role == 2)
+                {
+                    echo "<a class='nav-link mx-2' href='#'><i class='bi bi-cart'></i></a>";
+                }
+            ?>
+            
         </div>
         <a class='navbar-brand d-flex justify-content-center' href='../index.php'>
             <img src='assets/Imagotipo.png' alt='' style='height: 3rem; object-fit: contain;'>
@@ -44,27 +89,10 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="#">Perfil</a></li>
-                            <li><a class="dropdown-item" href="#">Mensajes</a></li>
                             <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
                         </ul>
                     </li>
-                    <!-- My purchases -->
-                    <li class="nav-item d-flex justify-content-center">
-                        <a class="nav-link" href="#">Mis pedidos</a>
-                    </li>
-                    <!-- My Bookmarks-->
-                    <li class="nav-item d-flex justify-content-center">
-                        <a class="nav-link" href="#">Mis listas</a>
-                    </li>
-                    <!-- My notifications -->
-                    <li class="nav-item d-flex justify-content-center d-none d-lg-block">
-                        <a class="nav-link" href="#"><i class="bi bi-bell"></i></a>
-                    </li>
-                    <!-- My shopping Cart -->
-                    <li class="nav-item d-flex justify-content-center d-none d-lg-block">
-                        <a class="nav-link " href="#"><i class="bi bi-cart"></i></a>
-                    </li>
-                    
+                    <?php echo $nav_buttons; ?>
                 </div>
             </ul>
         </div>

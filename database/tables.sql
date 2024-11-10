@@ -66,7 +66,7 @@ CREATE TABLE `shopping_carts`
     `shoppingCart_id` INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador del producto en el carrito',
     `quantity` INT COMMENT 'Cantidad en el carrito',
     `product_id` INT NOT NULL COMMENT 'Identificador del producto relacionado con el carrito',
-    `user_id` INT NOT NULL COMMENT 'Identificador del u0suario dueño del carrito',
+    `user_id` INT NOT NULL COMMENT 'Identificador del usuario dueño del carrito',
     CONSTRAINT `fk_shopping_carts_product_id_products`
         FOREIGN KEY (`product_id`) 
         REFERENCES `products` (`product_id`),
@@ -114,15 +114,15 @@ CREATE TABLE `messages`
 CREATE TABLE `reviews`
 (
     `review_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Identificador de la reseña',
-    `user_id` INT NOT NULL COMMENT 'Identificador del usuario creador de la reseña',
+    `product_purchase_id` INT NOT NULL COMMENT 'Identificador del producto de la compra a la que hace referencia',
     `title` VARCHAR(32) NOT NULL COMMENT 'Titulo de la reseña',
     `review_body` VARCHAR(180) NOT NULL COMMENT 'Cuerpo de la reseña',
     `rate` INT NOT NULL COMMENT 'Calificación del producto',
     `active` TINYINT(1) NOT NULL COMMENT 'Bandera de reseña activa',
     `created_at` DATETIME NOT NULL COMMENT 'Fecha y hora del envío del mensaje',
-    CONSTRAINT `fk_reviews_user_id_users`
-        FOREIGN KEY (`user_id`)
-        REFERENCES `users` (`user_id`)
+    CONSTRAINT `fk_reviews_product_purchase_id_sale_details`
+        FOREIGN KEY (`product_purchase_id`)
+        REFERENCES `sale_details` (`sale_details_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --Listas

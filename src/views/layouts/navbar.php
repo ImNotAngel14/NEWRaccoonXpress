@@ -1,4 +1,5 @@
 <?php
+    $user_role = 1;
     $nav_buttons = ""; // Inicializar variable vacía para almacenar los botones
 
     switch ($user_role) {
@@ -66,6 +67,12 @@
                         Categorias
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
+                        <?php 
+                            if($user_role == 2)
+                            {
+                                echo "<li><a class='dropdown-item' href='#'>Crear categoria</a></li>";
+                            }
+                        ?>
                         <li><a class="dropdown-item" href="#">Tecnologia</a></li>
                         <li><a class="dropdown-item" href="#">Ingles</a></li>
                         <li><a class="dropdown-item" href="#">Web development</a></li>
@@ -92,6 +99,7 @@
                             <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
                         </ul>
                     </li>
+                    <!-- Role Buttons -->
                     <?php echo $nav_buttons; ?>
                 </div>
             </ul>

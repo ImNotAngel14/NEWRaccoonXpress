@@ -8,7 +8,6 @@
 </head>
 <body>
     <?php
-    $user_role = 1;
     include __DIR__ . '/layouts/navbar.php';
     ?>
     <div class="container d-flex justify-content-center">

@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php
+    include __DIR__ . '/layouts/general_header.php';
+    ?>
     <title>Iniciar sesión</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/general.css">
 </head>
 <body class="container d-flex justify-content-center ">
     <div class="row justify-content-center align-items-center w-100" style="height: 100vh;">
@@ -39,6 +37,12 @@
                                     <li id="req_special">Un carácter especial.</li>
                                 </ul>
                             </div>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="persistent" id="persistent">
+                            <label class="form-check-label" for="persistent">
+                                Mantener mi sesión iniciada
+                            </label>
                         </div>
                         <!-- Log In button -->
                         <div class="text-center mb-3">

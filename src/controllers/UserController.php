@@ -25,8 +25,22 @@ class UserController
         $username = $_POST['username'];
         $password = $_POST['password'];
         $user = new User();
-        $found_user = $user->authUser($username, $password);
-        echo json_encode(['auth_status'=>$found_user]);
+        $auth_status = $user->authUser($username, $password);
+        if($auth_status)
+        {
+            session_start();
+            $_SESSION['user'] = $user->getUserId();
+            $_SESSION['role'] = $user->getUserRole();
+        }
+        echo json_encode(['auth_status' => $auth_status, 'user'=>$user->getUserId(), 'role' => $user->getUserRole()]);
+    }
+
+    public function logout()
+    {
+        session_start();
+        unset($_SESSION["user"]);
+        unset($_SESSION["role"]);
+        echo json_encode(['logout' => isset($_SESSION["user"])]);
     }
 }
 

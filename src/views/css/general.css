@@ -57,6 +57,12 @@ li.valid
     color: white  !important;
 }
 
+.my-primary:focus
+{
+    background-color: #8DB3B0  !important;
+    color: white  !important;
+}
+
 .my-secondary
 {
     background-color: #629584;
@@ -72,6 +78,35 @@ li.valid
 
 .my-secondary:active {
     background-color: #C2DACF  !important;
+    color: white  !important;
+}
+
+.my-secondary:focus {
+    background-color: #A2C3B6  !important;
+    color: white  !important;
+}
+
+.my-danger
+{
+    background-color: #9C3A3C;
+    color: white;
+    border: #9C3A3C;
+}
+
+.my-danger:hover
+{
+    background-color: #B14B42;
+    color: white;
+}
+
+.my-danger:active {
+    background-color: #F17974  !important;
+    color: white  !important;
+}
+
+.my-danger:focus
+{
+    background-color: #F17974  !important;
     color: white  !important;
 }
 

@@ -1,3 +1,9 @@
+<?php
+     require '../../api/middleware.php';
+
+    // Llama al middleware antes de cualquier contenido
+    AuthMiddleware::handle();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

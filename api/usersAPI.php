@@ -6,16 +6,29 @@ $controller = new UserController();
 
 switch ($method) {
     case 'POST':
-        if ($_GET['action'] === 'login') {
-            $controller->login();
-        } elseif ($_GET['action'] === 'register') {
-            $controller->register();
+        switch($_GET['action'])
+        {
+            case 'login':
+                $controller->login();
+                break;
+            case 'register':
+                $controller->register();
+                break;
+            case 'logout':
+                $controller->logout();
+                break;
         }
         break;
 
     case 'GET':
-        if ($_GET['action'] === 'profile') {
-            $controller->getProfile();
+        switch($_GET['action'])
+        {
+            case 'profile':
+                $controller->getProfile();
+                break;
+            case 'register':
+                $controller->register();
+                break;
         }
         break;
 

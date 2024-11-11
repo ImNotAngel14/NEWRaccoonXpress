@@ -1,5 +1,5 @@
 <?php
-    $user_role = 1;
+    $user_role = $_SESSION['role'];
     $nav_buttons = ""; // Inicializar variable vacía para almacenar los botones
 
     switch ($user_role) {

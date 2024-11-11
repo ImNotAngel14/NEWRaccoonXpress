@@ -29,7 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById("auth_status_msg").classList.toggle("d-none", result.auth_status);
                 if(result.auth_status)
                 {
-                    window.location.href = 'home.html';
+                    window.location.href = 'home.php';
+                    localStorage.setItem('user_id', result.user);
+                    localStorage.setItem('user_role', result.role);
                 }
                 else
                 {
@@ -42,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, false);
 
     document.getElementById('registerButton').addEventListener('click', function() {
-        window.location.href = 'register.html';
+        window.location.href = 'register.php';
     });
 
     

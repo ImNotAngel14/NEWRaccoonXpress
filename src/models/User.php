@@ -1,7 +1,8 @@
 <?php
 require_once '../config/Database.php';
 
-class User {
+class User 
+{
     private $conn = null;
     private $user_id;
     private $email;
@@ -97,9 +98,13 @@ class User {
         $stmt->bind_param("ss", $username, $password);
         $stmt->execute();
         $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        $foundUser = $row['found_user'];
-        return $foundUser;
+        if($result->num_rows > 0)
+        {
+            $row = $result->fetch_assoc();
+            $this->user_role = $row['user_role'];
+            $this->user_id = $row['user_id'];
+        }
+        return ($result->num_rows > 0);
     }
     // Getters
     public function getUserId() {

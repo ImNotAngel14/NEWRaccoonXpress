@@ -106,6 +106,25 @@ class User
         }
         return ($result->num_rows > 0);
     }
+
+    public function deactivate()
+    {
+        try
+        {
+            $sql = "CALL `sp_deactivate_user`(?);";
+            $database = new Database();
+            $this->conn = $database->connect();
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("i", $this->user_id);
+            $stmt->execute();
+            return $this->conn->affected_rows > 0;
+        }
+        catch(mysqli_sql_exception $e)
+        {
+            error_log($e . "\r\n", 3, "../logs/error_logs.log");
+            return false;
+        }
+    }
     // Getters
     public function getUserId() {
         return $this->user_id;

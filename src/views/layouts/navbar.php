@@ -56,7 +56,7 @@
             ?>
             
         </div>
-        <a class='navbar-brand d-flex justify-content-center' href='../index.php'>
+        <a class='navbar-brand d-flex justify-content-center' href='../../index.php'>
             <img src='assets/Imagotipo.png' alt='' style='height: 3rem; object-fit: contain;'>
         </a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -95,8 +95,33 @@
                             Perfil
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">Perfil</a></li>
-                            <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                            <li><a class="dropdown-item" href="profile.php">Perfil</a></li>
+                            <li><a class="dropdown-item" id="log_out_button">Cerrar sesión</a></li>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', () => {
+                                    document.getElementById("log_out_button").addEventListener("click", async function(event) {
+                                        event.preventDefault();
+                                        try
+                                        {
+                                            const response = await fetch('http://localhost/NewRaccoonXpress/api/usersAPI.php?action=logout', {
+                                                method: "POST"
+                                            });
+                                            const result = await response.json();
+                                            if (result.logout) {
+                                                // Redirige al usuario a la página de inicio o de login
+                                                window.location.href = "landing_page.php";
+                                                localStorage.removeItem('user_id');
+                                                localStorage.removeItem('user_role');
+                                            } else {
+                                                console.error("Error al cerrar sesión:", response.statusText);
+                                            }
+                                        }
+                                        catch (error) {
+                                            console.error("Error:", error);
+                                        }
+                                    });
+                                });
+                            </script>
                         </ul>
                     </li>
                     <!-- Role Buttons -->

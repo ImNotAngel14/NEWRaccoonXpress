@@ -40,7 +40,23 @@ class UserController
         session_start();
         unset($_SESSION["user"]);
         unset($_SESSION["role"]);
-        echo json_encode(['logout' => isset($_SESSION["user"])]);
+        echo json_encode(['logout' => !isset($_SESSION["user"]) && !isset($_SESSION["role"])]);
+    }
+
+    public function deactivate()
+    {
+        session_start();
+        $user = new User($user_id = $_SESSION['user']);
+        if($user->deactivate())
+        {
+            echo json_encode(['deactivated' => true]);
+            unset($_SESSION["user"]);
+            unset($_SESSION["role"]);
+        }
+        else
+        {
+            echo json_encode(['deactivated' => false]);
+        }
     }
 }
 

@@ -17,6 +17,9 @@ switch ($method) {
             case 'logout':
                 $controller->logout();
                 break;
+            case 'deactivate':
+                $controller->deactivate();
+                break;
         }
         break;
 

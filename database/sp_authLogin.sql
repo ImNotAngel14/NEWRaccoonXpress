@@ -8,7 +8,8 @@ CREATE PROCEDURE `sp_authLogin`
 BEGIN
 	SELECT `user_id`, `user_role` FROM `users`
 	WHERE `username` COLLATE utf8mb4_bin  = `p_username`
-	AND `user_password` COLLATE utf8mb4_bin = `p_user_password`;
+	AND `user_password` COLLATE utf8mb4_bin = `p_user_password`
+	AND `active` = 1;
 END;//
 
 DELIMITER ;

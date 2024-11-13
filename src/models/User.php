@@ -125,6 +125,89 @@ class User
             return false;
         }
     }
+
+    public function update()
+    {
+        try
+        {
+            $sql = "CALL `sp_update_user`(?,?,?,?,?,?,?,?);";
+            $database = new Database();
+            $this->conn = $database->connect();
+            $stmt = $this->conn->prepare($sql);
+            // username, email, password, firstName, lastName, birthdate, gender, visibility
+            $stmt->bind_param(
+                "ssssssii",
+                $this->username,
+                $this->email,
+                $this->user_password,
+                $this->first_name,
+                $this->last_name,
+                $this->birth_date,
+                $this->gender,
+                $this->visibility
+            );
+            $stmt->execute();
+            return $this->conn->affected_rows > 0;
+        }
+        catch(mysqli_sql_exception $e)
+        {
+            error_log($e . "\r\n", 3, "../logs/error_logs.log");
+            return false;
+        }
+    }
+
+    public function getUser($isOwner)
+    {
+        try
+        {
+            $sql = "CALL `sp_get_user`(?, ?);";
+            $database = new Database();
+            $this->conn = $database->connect();
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ii", $this->user_id, $isOwner);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if($result->num_rows > 0)
+            {
+                $row = $result->fetch_assoc();
+                $this->visibility = $row['visibility'];
+                $this->username = $row['username'];
+                $this->profile_image = $row['profile_image'];
+                $this->user_role = $row['user_role'];
+                if($isOwner)
+                {
+                    $this->user_password = $row['user_password'];
+                    $this->first_name = $row['first_name'];
+                    $this->last_name = $row['last_name'];
+                    $this->gender = $row['gender'];
+                    $this->birth_date = $row['birth_date'];
+                    $this->email = $row['email'];
+                }
+            }
+            return ($result->num_rows > 0);
+        }
+        catch(mysqli_sql_exception $e)
+        {
+            error_log($e . "\r\n", 3, "../logs/error_logs.log");
+            return false;
+        }
+    }
+
+    public function toArray()
+    {
+        return [
+            'visibility' => $this->visibility,
+            'username' => $this->username,
+            'profile_image' => base64_encode($this->profile_image),
+            'user_role' => $this->user_role,
+            'user_password' => $this->user_password,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'gender' => $this->gender,
+            'birth_date' => $this->birth_date,
+            'email' => $this->email
+        ];
+    }
     // Getters
     public function getUserId() {
         return $this->user_id;

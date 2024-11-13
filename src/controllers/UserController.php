@@ -58,6 +58,44 @@ class UserController
             echo json_encode(['deactivated' => false]);
         }
     }
+
+    public function update()
+    {
+        session_start();
+        $user = new User();
+        if($user->update())
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+
+    public function getProfile($userId)
+    {
+        session_start();
+        
+        // ID del usuario en sesión
+        $currentUserId = $_SESSION['user'] ?? null;
+
+        // Si no hay ID en la URL, usamos el ID de la sesión (es decir, se quiere el perfil personal)
+        if (is_null($userId)) {
+            $userId = $currentUserId;
+        }
+        $user = new User($userId);
+        $user->getUser($userId === $currentUserId);
+        try
+        {
+            echo json_encode(['user_info' => $user->toArray()]);
+        }
+        catch(exception $e)
+        {
+            error_log($e . "\r\n", 3, "../logs/error_logs.log");
+            echo json_encode(['error' => $e]);
+        }
+    }
 }
 
 ?>

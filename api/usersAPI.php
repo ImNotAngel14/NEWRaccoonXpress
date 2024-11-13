@@ -20,17 +20,18 @@ switch ($method) {
             case 'deactivate':
                 $controller->deactivate();
                 break;
+            case 'update':
+                $controller->update();
+                break;
         }
         break;
 
     case 'GET':
         switch($_GET['action'])
         {
-            case 'profile':
-                $controller->getProfile();
-                break;
-            case 'register':
-                $controller->register();
+            case 'user':
+                $userId = isset($_GET['id']) ? (int)$_GET['id'] : null;
+                $controller->getProfile($userId); 
                 break;
         }
         break;

@@ -1,5 +1,5 @@
 <?php
-     require '../../api/middleware.php';
+    require '../../api/middleware.php';
 
     // Llama al middleware antes de cualquier contenido
     AuthMiddleware::handle();
@@ -56,7 +56,7 @@
                 </div>
                 <div class="card">
                     <div class="card-body m-4">
-                        <form method="POST" class="needs-validation" novalidate>
+                        <form method="POST" onsubmit="return validate_update()" class="needs-validation" novalidate>
                             <div class="form-outline mb-3">
                                 <input type="text" class="form-control p-2" id="username" name="username" placeholder="Username" required/>
                                 <div class="invalid-feedback">Ingrese un nombre de usuario con mínimo 3 caracteres</div>

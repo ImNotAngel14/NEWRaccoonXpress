@@ -4,7 +4,7 @@
     <?php
     include __DIR__ . '/layouts/general_header.php';
     ?>
-    <link rel="stylesheet" href="css/landing_page.css">
+    <link rel="stylesheet" href="/NewRaccoonXpress/src/views/css/landing_page.css">
     <title>Home</title>
 </head>
 <body>
@@ -13,18 +13,18 @@
         <div class="container">
 
             <section class="cta">
-                <h2><a href="register.php" class="btn-cta">Registrate ahora</a></h2>
+                <h2><a href="index.php?controller=user&action=showRegister" class="btn-cta">Registrate ahora</a></h2>
                 <p>Vive la experiencia completa</p>
                 <br>
                 <p style="color: #494949;">¿Ya tienes una cuenta? &nbsp;</p>
-                <span class="link"><a href="login.php" style="color: lightskyblue;">Inicia Sesión</a><span>
+                <span class="link"><a href="index.php?controller=user&action=showLogin" style="color: lightskyblue;">Inicia Sesión</a><span>
             </section>
 
             <!-- <h1 id="watchme">Watch me move</h1> -->
 
             <div class="beneficio d-flex fadeIn">
                 <div class="beneficio_img">
-                    <img src="assets/Imagen2.jpg" alt="Beneficio 1">
+                    <img src="/NewRaccoonXpress/src/views/assets/Imagen2.jpg" alt="Beneficio 1">
                 </div>
                 <div class="beneficio_texto" style="padding-left: 1.5rem;">
                     <h2>Calidad Garantizada</h2>
@@ -38,7 +38,7 @@
 
             <div class="beneficio d-flex">
                 <div class="beneficio_img">
-                    <img src="assets/envio.jpg" alt="Beneficio 2">
+                    <img src="/NewRaccoonXpress/src/views/assets/envio.jpg" alt="Beneficio 2">
                     </div>
                 <div class="beneficio_texto" style="padding-left: 1.5rem;">
                     <h2>Envío Rápido</h2>
@@ -53,7 +53,7 @@
 
             <div class="beneficio d-flex">
                 <div class="beneficio_img">
-                    <img src="assets/servcliente.jpg" alt="Beneficio 3">
+                    <img src="/NewRaccoonXpress/src/views/assets/servcliente.jpg" alt="Beneficio 3">
                 </div>
                 <div class="beneficio_texto" style="padding-left: 1.5rem;">
                     <h2>Atención al Cliente</h2>

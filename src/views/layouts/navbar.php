@@ -57,7 +57,7 @@
             
         </div>
         <a class='navbar-brand d-flex justify-content-center' href='../../index.php'>
-            <img src='assets/Imagotipo.png' alt='' style='height: 3rem; object-fit: contain;'>
+            <img src='/NewRaccoonXpress/src/views/assets/Imagotipo.png' alt='' style='height: 3rem; object-fit: contain;'>
         </a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav container-fluid">
@@ -73,7 +73,7 @@
                                 echo "<li><a class='dropdown-item' href='#'>Crear categoria</a></li>";
                             }
                         ?>
-                        <li><a class="dropdown-item" href="#">Tecnologia</a></li>
+                        <li><a class="dropdown-item" href="#"><?php echo htmlspecialchars($hola); ?></a></li>
                         <li><a class="dropdown-item" href="#">Ingles</a></li>
                         <li><a class="dropdown-item" href="#">Web development</a></li>
                     </ul>
@@ -91,8 +91,8 @@
                     <!-- Profile -->
                     <li class="nav-item dropdown d-flex justify-content-center d-none d-lg-block">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="assets/no-profile-user.png" alt="Profile" class="m-2" style='height: 2rem; object-fit: contain;'>
-                            Perfil
+                            <img src="<?php echo htmlspecialchars($profileImage); ?>" alt="Profile" class="m-2" style='height: 2rem; object-fit: contain;'>
+                            <?php echo htmlspecialchars($username); ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="profile.php">Perfil</a></li>

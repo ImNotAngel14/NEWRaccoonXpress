@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             const formData = new FormData(this);
             try {
-                const response = await fetch("http://localhost/NewRaccoonXpress/api/usersAPI.php?action=login", {
+                const response = await fetch("http://localhost/NewRaccoonXpress/index.php?controller=user&action=login", {
                     method: "POST",
                     body: formData
                 });
@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById("auth_status_msg").classList.toggle("d-none", result.auth_status);
                 if(result.auth_status)
                 {
-                    window.location.href = 'home.php';
-                    localStorage.setItem('user_id', result.user);
-                    localStorage.setItem('user_role', result.role);
+                    window.location.href = 'index.php?controller=home&action=home';
+                    //localStorage.setItem('user_id', result.user);
+                    //localStorage.setItem('user_role', result.role);
                 }
                 else
                 {
@@ -40,11 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 console.error("Error:", error);
             }
-        }        
+        }
+    
     }, false);
 
     document.getElementById('registerButton').addEventListener('click', function() {
-        window.location.href = 'register.php';
+        window.location.href = 'index.php?controller=user&action=showRegister';
     });
 
     

@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             const formData = new FormData(this);
             try {
-                const response = await fetch("http://localhost/NewRaccoonXpress/api/usersAPI.php?action=register", {
+                const response = await fetch("http://localhost/NewRaccoonXpress/index.php?controller=user&action=register", {
                     method: "POST",
                     body: formData
                 });
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (result.success) 
                 {
-                    window.location.href = 'login.php';
+                    window.location.href = 'index.php?controller=user&action=showLogin';
                 } 
                 else 
                 {

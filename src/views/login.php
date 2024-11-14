@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-body m-4">
                     <div id="auth_status_msg" class="p-3 mb-3 text-bg-danger rounded-3 d-none">Credenciales incorrectas.</div>
-                    <form method="post" action="/NEWRaccoonXpress/api/usersAPI.php?action=register" class="needs-validation" novalidate>
+                    <form method="post" action="index.php?controller=user&action=login" class="needs-validation" novalidate>
                         <!-- Username input -->
                         <div class="form-outline mb-3">
                             <input type="text" id="username" name="username" class="form-control" placeholder="Username" required/>
@@ -55,7 +55,7 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="js/login.js"></script>
+    <script src="/NewRaccoonXpress/src/views/js/login.js"></script>
 </body>
 
 </html>

@@ -1,9 +1,3 @@
-<?php
-     require '../../api/middleware.php';
-
-    // Llama al middleware antes de cualquier contenido
-    AuthMiddleware::handle();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +21,7 @@
                     <?php
                         $productId = 1;
                         $productName = 'Nintendo Lite Switch Lite 32GB Standard color turquesa 2017';
-                        $productImage = 'assets/switchLite.webp';
+                        $productImage = '/NewRaccoonXpress/src/views/assets/switchLite.webp';
                         $productPrice = 59.99;
                         $review_count = 1;
                         $rating = 3;

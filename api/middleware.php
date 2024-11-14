@@ -7,7 +7,7 @@ class AuthMiddleware {
             // Redirigir al usuario a la página de login si no está autenticado
             unset($_SESSION["user"]);
             unset($_SESSION["role"]);
-            header("Location: ../views/landing_page.php");
+            header("Location: index.php?controller=home&action=landing_page");
             exit();
         }
     }

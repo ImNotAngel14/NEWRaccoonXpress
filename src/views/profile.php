@@ -1,9 +1,3 @@
-<?php
-    require '../../api/middleware.php';
-
-    // Llama al middleware antes de cualquier contenido
-    AuthMiddleware::handle();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,17 +16,17 @@
             <div class="col-3 d-flex justify-content-center " >
                 <div class="card flex-fill">
                     <div class="card-body p-5">
-                        <h3 class="card-title text-center ">Username</h3>
+                        <h3 class="card-title text-center "><?php echo htmlspecialchars($username); ?></h3>
                         <div class='position-absolute top-0 end-0 m-4'>
                             <button id='edit_user' class='btn my-secondary' type='submit' data-bs-toggle='modal' data-bs-target='#ModalUpdateAccount'>
                                 <i class="bi bi-pencil-square"></i>
                             </button>
                         </div>
-                        <img id="profile_image" class="img-fluid p-5 text-center " src="assets/no-profile-user.png" alt="">
-                        <h5 class="card-subtitle mb-4 text-body-secondary text-center ">Vendedor</h5>
-                        <p class="card-text text-start">Correo :</p>
-                        <p class="card-text text-start">Nombre completo :</p>
-                        <p class="card-text text-start">Fecha de nacimiento :</p>
+                        <img id="profile_image" class="container-fluid img-fluid p-5 text-center " src="<?php echo $profileImage ?>" alt="" style='border-radius: 50%; image-rendering: pixelated;'>
+                        <h5 class="card-subtitle mb-4 text-body-secondary text-center "><?php echo htmlspecialchars($role); ?></h5>
+                        <p class="card-text text-start <?php if($visibility){echo "d-none";}  ?>"><b>Correo : </b><?php echo htmlspecialchars($email); ?></p>
+                        <p class="card-text text-start"><b>Nombre completo : </b><?php echo htmlspecialchars($firstname . " " . $lastname); ?></p>
+                        <p class="card-text text-start"><b>Fecha de nacimiento : </b><?php echo htmlspecialchars($birthdate); ?></p>
                         <div class="d-flex justify-content-center">
                             <button id='id_delete_account' class='btn my-danger m-2' data-bs-toggle='modal' data-bs-target='#ModalDeleteAccount'>
                                 Eliminar Perfil
@@ -58,15 +52,15 @@
                     <div class="card-body m-4">
                         <form method="POST" onsubmit="return validate_update()" class="needs-validation" novalidate>
                             <div class="form-outline mb-3">
-                                <input type="text" class="form-control p-2" id="username" name="username" placeholder="Username" required/>
+                                <input type="text" class="form-control p-2" id="username" name="username" placeholder="Username" value="<?php echo $username; ?>" required/>
                                 <div class="invalid-feedback">Ingrese un nombre de usuario con mínimo 3 caracteres</div>
                             </div>
                             <div class="form-outline mb-3">
-                                <input type="email" class="form-control p-2" id="email" name="email" placeholder="Email" required/>
+                                <input type="email" class="form-control p-2" id="email" name="email" placeholder="Email" value="<?php echo $email; ?>" required/>
                                 <div class="invalid-feedback">Ingrese una dirección de correo electrónico válida.</div>
                             </div>
                             <div class="input-group has-validation mb-3">
-                                <input type="password" class="form-control p-2" id="password" name="password" placeholder="Password" required/>
+                                <input type="password" class="form-control p-2" id="password" name="password" placeholder="Password" value="<?php echo $password; ?>" required/>
                                 <button type="button" class="btn my-outline-gray" onclick="togglePassword()"><i class="bi bi-eye-slash" id="toggleIcon"></i></button>
                                 <div class="invalid-feedback">
                                     <p>La contraseña debe incluir:</p>
@@ -81,28 +75,28 @@
                             </div>                        
                             <div class="row">
                                 <div class="col-sm-12 col-md-6 mb-3">
-                                    <input type="text" class="form-control" name="first_name" placeholder="First name" aria-label="First name" required>
+                                    <input type="text" class="form-control" name="first_name" placeholder="First name" aria-label="First name" value="<?php echo $firstname; ?>" required>
                                     <div class="invalid-feedback">Ingrese su nombre.</div>
                                 </div>
                                 <div class="col-sm-12 col-md-6 mb-3">
-                                    <input type="text" class="form-control" name="last_name" placeholder="Last name" aria-label="Last name" required>
+                                    <input type="text" class="form-control" name="last_name" placeholder="Last name" aria-label="Last name" value="<?php echo $lastname; ?>" required>
                                     <div class="invalid-feedback">Ingrese su apellido.</div>
                                 </div>
                             </div>
                             <div class="form-outline mb-3">
-                                <input type="date" class="form-control p-2" id="birth_date" name="birth_date" placeholder="Fecha de Nacimiento " required>
+                                <input type="date" class="form-control p-2" id="birth_date" name="birth_date" placeholder="Fecha de Nacimiento" value="<?php echo $birthdate; ?>" required>
                                 <div class="invalid-feedback">Debe seleccionar una fecha de nacimiento.</div>
                             </div>
                             <div class="mb-3">
                                 <select class="form-select" name="gender" required >
                                     <option value="">Género</option>
-                                    <option value="0" class="opcion">Masculino</option>
-                                    <option value="1" class="opcion">Femenino</option>
+                                    <option value="0" class="opcion" <?php if(!$gender) { echo " selected"; } ?>>Masculino</option>
+                                    <option value="1" class="opcion" <?php if($gender) { echo " selected"; } ?>>Femenino</option>
                                 </select>
                                 <div class="invalid-feedback">Seleccione su género.</div>
                             </div>
                             <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" name="visibility" id="visibility">
+                                <input class="form-check-input" type="checkbox" name="visibility" id="visibility" <?php if($visibility) { echo "checked"; } ?> >
                                 <label class="form-check-label" for="visibility">
                                     Perfil público
                                 </label>
@@ -130,7 +124,7 @@
                     <br>
                     <div class=" text-end">
                         
-                        <form method="POST" onsubmit="return deactivate_account();">
+                        <form method="POST" action="index.php?controller=user&action=deactivateUser">
                             <button type="button" class="btn my-secondary" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn my-danger" id="id_btn_delete_user">Aceptar</button>
                         </form>
@@ -140,6 +134,6 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="js/profile.js"></script>
+    <script src="/NewRaccoonXpress/src/views/js/profile.js"></script>
 </body>
 </html>

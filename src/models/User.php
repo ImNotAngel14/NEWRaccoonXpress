@@ -172,7 +172,7 @@ class User
                 $row = $result->fetch_assoc();
                 $this->visibility = $row['visibility'];
                 $this->username = $row['username'];
-                $this->profile_image = $row['profile_image'];
+                $this->profile_image = is_null($row['profile_image']) || $row['profile_image'] === "" ? null : base64_encode($row['profile_image']);
                 $this->user_role = $row['user_role'];
                 if($isOwner)
                 {
@@ -198,7 +198,7 @@ class User
         return [
             'visibility' => $this->visibility,
             'username' => $this->username,
-            'profile_image' => base64_encode($this->profile_image),
+            'profile_image' => $this->profile_image,
             'user_role' => $this->user_role,
             'user_password' => $this->user_password,
             'first_name' => $this->first_name,

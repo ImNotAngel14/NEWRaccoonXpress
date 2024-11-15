@@ -13,16 +13,15 @@
             // Imprimir su foto de perfil en el view
             $userController = new UserController();
             $user = $userController->GetUser();
-            if(isset($user["user_info"]))
+            $username = $user["username"];
+            if(isset($user["profile_image"]))
             {
-                echo json_encode(["message" => $user["message"]]);    
+                $profileImage = "data:image/png;base64," . $user["profile_image"];
             }
-            else{
-                echo json_encode(["username" => $user["user_info"]["username"]]);
+            else
+            {
+                $profileImage = "/NewRaccoonXpress/src/views/assets/no-profile-user.png";
             }
-            exit;
-            $username = $user["user_info"]["username"];
-            $profileImage = isset($user["user_info"]["profile_image"]) ? $user["user_info"]["profile_image"] : "/NewRaccoonXpress/src/views/assets/no-profile-user.png";
             require "src/views/home.php";
         }
     }

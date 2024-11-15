@@ -35,7 +35,6 @@ switch ($method) {
                     echo json_encode(['success' => false, 'error'=>"Faltan parametros en la llamada de la API"]);
                     break;
                 }
-                //
                 $user = new User($user_id = $_GET['userId']);
                 echo json_encode(['success' => true, 'deactivated' => $user->deactivate()]);
                 break;

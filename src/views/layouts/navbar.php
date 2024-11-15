@@ -91,12 +91,13 @@
                     <!-- Profile -->
                     <li class="nav-item dropdown d-flex justify-content-center d-none d-lg-block">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="<?php echo htmlspecialchars($profileImage); ?>" alt="Profile" class="m-2" style='height: 2rem; object-fit: contain;'>
-                            <?php echo htmlspecialchars($username); ?>
+                            <!--img src="<?php echo $profileImage ?>" alt="Profile" class="m-2 container-fluid" style='height: 2rem; object-fit: contain; border-radius: 50%; image-rendering: pixelated;"'-->
+                            <?php //echo htmlspecialchars($username); 
+                            echo "Perfil"; ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="profile.php">Perfil</a></li>
-                            <li><a class="dropdown-item" id="log_out_button">Cerrar sesión</a></li>
+                            <li><a class="dropdown-item" href="index.php?controller=user&action=showProfile">Perfil</a></li>
+                            <li><a class="dropdown-item" href="index.php?controller=user&action=logout">Cerrar sesión</a></li>
                             <script>
                                 document.addEventListener('DOMContentLoaded', () => {
                                     document.getElementById("log_out_button").addEventListener("click", async function(event) {

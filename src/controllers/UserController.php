@@ -46,7 +46,9 @@
                 $data = json_decode($response, true);
                 // Muestra la respuesta (esto depende de lo que haga tu API)
                 if (isset($data['auth_status']) && $data['auth_status'] === true) {
-                    session_start();
+                    if (session_status() === PHP_SESSION_NONE) {
+                        session_start();
+                    }
                     $_SESSION['user'] = $data['user'];
                     $_SESSION['role'] = $data['role'];
                     echo json_encode(['auth_status' => true, 'user' => $data['user'], 'role' => $data['role']]);
@@ -135,62 +137,144 @@
 
         public function DeactivateUser()
         {
+            if(isset($_SESSION['user']))
+            {
+                $currentUserId = (int)$_SESSION['user'];
+                $url = "http://localhost/NEWRaccoonXpress/api/usersAPI.php?action=deactivate&userId=$currentUserId";
+                // Inicializa una sesión cURL
+                $ch = curl_init();
 
+                // Configura la solicitud cURL
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Para que se devuelva la respuesta en vez de imprimirla
+                curl_setopt($ch, CURLOPT_POST, true); // Hacemos una solicitud POST
+                // Si tu API requiere algún dato (como credenciales), puedes agregarlo aquí
+
+                // Ejecuta la solicitud y guarda la respuesta
+                $response = curl_exec($ch);
+
+                // Verifica si ocurrió algún error
+                if ($response === false) {
+                    echo json_encode(['success' => false, 'error' => curl_error($ch)]);
+                    exit;
+                }
+
+                // Cierra la sesión cURL
+                curl_close($ch);
+
+                // Procesa la respuesta, si la API devuelve JSON, por ejemplo:
+                $data = json_decode($response, true);
+
+                // Si la API regresa algo como { "success": true, "auth_status": true, ... }
+                if (isset($data['success'])) 
+                {
+                    if($data['deactivated'])
+                    {
+                        unset($_SESSION["user"]);
+                        unset($_SESSION["role"]);
+                        header("Location: index.php?controller=home&action=home");
+                    }
+                    else
+                    {
+                        echo json_encode(['deactivated' =>$data['deactivated']]);
+                    }
+                } else {
+                    echo json_encode(['deactivated' => false, 'message' => 'Error de la API al regresar la respuesta.']);
+                }
+            }
         }
 
         public function Logout()
         {
-            session_start();
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
             unset($_SESSION["user"]);
             unset($_SESSION["role"]);
-            echo json_encode(['logout' => !isset($_SESSION["user"]) && !isset($_SESSION["role"])]);
+            header("Location: index.php");
+            // echo json_encode(['logout' => !isset($_SESSION["user"]) && !isset($_SESSION["role"])]);
         }
 
         public function ShowProfile()
         {
-            echo json_encode(['xd' => "Hola"]);
-            exit;
+            $user = UserController::GetUser();
+            $username = $user['username'];
+            if(isset($user['profile_image']))
+            {
+                $profileImage = "data:image/png;base64," . $user["profile_image"];
+            }
+            else
+            {
+                $profileImage = "/NewRaccoonXpress/src/views/assets/no-profile-user.png";
+            }
+            switch((int)$user['user_role'])
+            {
+                case 0: // Admin
+                    $role = "Admin";
+                    break;
+                case 1: // Seller
+                    $role = "Vendedor";
+                    break;
+                case 2: // Buyer
+                    $role = "Comprador";
+                    break;
+            }
+            $visibility = (int)$user['visibility'];
+            $email = $user['email'];
+            $firstname = $user['first_name'];
+            $lastname = $user['last_name'];
+            $birthdate = $user['birth_date'];
+            $password = $user['user_password'];
+            $gender = $user['gender'];
+            require "src/views/profile.php";
         }
 
         public function GetUser()
         {
-            if (isset($_GET['userId']) && isset($_GET['isOwner']))
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            if(isset($_SESSION['user']))
             {
-                $url = "http://localhost/NEWRaccoonXpress/api/usersAPI.php?action=user&userId=".$_GET['userId']."&isOwner=".$_GET['isOwner'];
-
+                $currentUserId = (int)$_SESSION['user'];
+                if(isset($_GET['userId']))
+                {
+                    $userId = (int)$_GET['userId'];
+                }
+                else
+                {
+                    $userId = $currentUserId;
+                }
+                $url = "http://localhost/NEWRaccoonXpress/api/usersAPI.php?action=user&userId=$userId&isOwner=".($userId === $currentUserId)."";
                 // Inicializa una sesión cURL
                 $ch = curl_init();
-    
+
                 // Configura la solicitud cURL
                 curl_setopt($ch, CURLOPT_URL, $url);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Para que se devuelva la respuesta en vez de imprimirla
                 // Si tu API requiere algún dato (como credenciales), puedes agregarlo aquí
-    
+
                 // Ejecuta la solicitud y guarda la respuesta
                 $response = curl_exec($ch);
-    
+
                 // Verifica si ocurrió algún error
                 if ($response === false) {
                     echo json_encode(['user_info' => null, 'error' => curl_error($ch)]);
                     exit;
                 }
-    
+
                 // Cierra la sesión cURL
                 curl_close($ch);
-    
+
                 // Procesa la respuesta, si la API devuelve JSON, por ejemplo:
                 $data = json_decode($response, true);
-    
+
                 // Si la API regresa algo como { "success": true, "auth_status": true, ... }
                 if (isset($data['user_info']) && $data['user_info'] != false) {
                     return $data['user_info'];
                 } else {
                     return ['user_info' => null, 'message' => 'Error al obtener la información'];
                 }
-            }
-            else
-            {
-                return ['user_info' => null, 'message' => 'Error al obtener la información'];
             }
         }
     }

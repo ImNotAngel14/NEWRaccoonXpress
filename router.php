@@ -6,7 +6,7 @@ class Router
     {
         $publicRoutes = [
             'user' => ['showLogin', 'showRegister', 'login', 'register', 'getUser', 'showProfile'],
-            'home' => ['landing_page', 'home']
+            'home' => ['landing_page']
         ];
 
         if (!(isset($publicRoutes[$controller]) && in_array($action, $publicRoutes[$controller]))) {

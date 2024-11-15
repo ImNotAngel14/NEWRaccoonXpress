@@ -1,13 +1,8 @@
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('ola');
-});
-
-
-async function deactivate_account()
+/*async function deactivate_account()
 {
     event.preventDefault();
     try {
-        const response = await fetch("http://localhost/NewRaccoonXpress/api/usersAPI.php?action=deactivate", {
+        const response = await fetch("http://localhost/NewRaccoonXpress/index.php?controller=user&action=deactivateUser", {
             method: "POST"
         });
         const result = await response.json();
@@ -26,7 +21,7 @@ async function deactivate_account()
         console.error("Error:", error);
         return false;
     }
-}
+}*/
 
 async function validate_update()
 {

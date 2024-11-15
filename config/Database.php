@@ -12,6 +12,7 @@
          try 
          {
             $mysqli = new mysqli($this->host, $this->username, $this->password, $this->db_name);
+            $mysqli->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, true);
             if ($mysqli->connect_errno) 
             {
                $response = (object)array("status"=>500, "message"=>$mysqli->connect_error);

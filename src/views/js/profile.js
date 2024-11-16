@@ -23,8 +23,7 @@
     }
 }*/
 
-async function validate_update()
-{
+document.addEventListener('DOMContentLoaded', () => {
     // Validamos el nombre de usuario
     const usernameInput = document.getElementById("username");
     usernameInput.addEventListener('input', () => {
@@ -43,7 +42,7 @@ async function validate_update()
         validatePassword(passwordInput.value) ? passwordInput.setCustomValidity('') : passwordInput.setCustomValidity('La contraseña debe cumplir con ciertos requisitos.');
     });
 
-    const form = document.querySelector('.needs-validation');
+    const form = document.getElementById('updateForm');
     form.addEventListener('submit', async function(event) {
         event.preventDefault();
         form.classList.add('was-validated');
@@ -51,16 +50,16 @@ async function validate_update()
         {
             const formData = new FormData(this);
             try {
-                const response = await fetch("http://localhost/NewRaccoonXpress/api/usersAPI.php?action=update", {
+                const response = await fetch("http://localhost/NewRaccoonXpress/index.php?controller=user&action=updateUser", {
                     method: "POST",
                     body: formData
                 });
 
                 const result = await response.json();
-                
+                console.log(result);
                 if (result.success) 
                 {
-                    alert('Datos actualizados');
+                    window.location.href = 'index.php?controller=user&action=showProfile';
                 } 
                 else 
                 {
@@ -68,11 +67,11 @@ async function validate_update()
                     console.error("Error al actualizar la cuenta: ", response.statusText);
                 }
             } catch (error) {
-                console.error("Error:", error);
+                console.log("Error:", error);
             }
         }        
     }, false);
-}
+});
 
 function validateUsername(username)
 {

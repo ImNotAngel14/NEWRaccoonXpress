@@ -24,9 +24,9 @@
                         </div>
                         <img id="profile_image" class="container-fluid img-fluid p-5 text-center " src="<?php echo $profileImage ?>" alt="" style='border-radius: 50%; image-rendering: pixelated;'>
                         <h5 class="card-subtitle mb-4 text-body-secondary text-center "><?php echo htmlspecialchars($role); ?></h5>
-                        <p class="card-text text-start <?php if($visibility){echo "d-none";}  ?>"><b>Correo : </b><?php echo htmlspecialchars($email); ?></p>
-                        <p class="card-text text-start"><b>Nombre completo : </b><?php echo htmlspecialchars($firstname . " " . $lastname); ?></p>
-                        <p class="card-text text-start"><b>Fecha de nacimiento : </b><?php echo htmlspecialchars($birthdate); ?></p>
+                        <p class="card-text text-start <?php if(!$email)    {echo "d-none";}  ?>"><b>Correo : </b><?php echo htmlspecialchars($email); ?></p>
+                        <p class="card-text text-start <?php if(!$firstname){echo "d-none";}  ?>"><b>Nombre completo : </b><?php echo htmlspecialchars($firstname . " " . $lastname); ?></p>
+                        <p class="card-text text-start <?php if(!$birthdate){echo "d-none";}  ?>"><b>Fecha de nacimiento : </b><?php echo htmlspecialchars($birthdate); ?></p>
                         <div class="d-flex justify-content-center">
                             <button id='id_delete_account' class='btn my-danger m-2' data-bs-toggle='modal' data-bs-target='#ModalDeleteAccount'>
                                 Eliminar Perfil
@@ -41,7 +41,7 @@
         </div>
     </div>
     <!-- Update Profile Modal -->
-    <div class="modal fade" id="ModalUpdateAccount" tabindex="-1" aria-labelledby="ModalmodifieLabel" aria-hidden="true">
+    <div class="modal fade" id="ModalUpdateAccount"  tabindex="-1" aria-labelledby="ModalmodifieLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -50,7 +50,11 @@
                 </div>
                 <div class="card">
                     <div class="card-body m-4">
-                        <form method="POST" onsubmit="return validate_update()" class="needs-validation" novalidate>
+                        <form method="POST" class="needs-validation" enctype="multipart/form-data" id="updateForm" novalidate>
+                            <div class="mb-3">
+                                <label class="form-label">Foto de perfil</label>
+                                <input type="file" class="form-control" id="profile_image" name="profile_image">
+                            </div>
                             <div class="form-outline mb-3">
                                 <input type="text" class="form-control p-2" id="username" name="username" placeholder="Username" value="<?php echo $username; ?>" required/>
                                 <div class="invalid-feedback">Ingrese un nombre de usuario con mínimo 3 caracteres</div>

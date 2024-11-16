@@ -1,0 +1,5 @@
+mysqli_sql_exception: Incorrect number of arguments for PROCEDURE new_raccoonxpress.sp_update_user; expected 10, got 9 in D:\xampp\htdocs\NEWRaccoonXpress\src\models\User.php:150
+Stack trace:
+#0 D:\xampp\htdocs\NEWRaccoonXpress\src\models\User.php(150): mysqli_stmt->execute()
+#1 D:\xampp\htdocs\NEWRaccoonXpress\api\usersAPI.php(53): User->update()
+#2 {main}

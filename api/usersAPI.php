@@ -35,8 +35,23 @@ switch ($method) {
                     echo json_encode(['success' => false, 'error'=>"Faltan parametros en la llamada de la API"]);
                     break;
                 }
-                $user = new User($user_id = $_GET['userId']);
+                $user = new User($_GET['userId']);
                 echo json_encode(['success' => true, 'deactivated' => $user->deactivate()]);
+                break;
+            case 'update':
+                ////id, email, password, role, nombre, apellido, genero, cumple, visibili, activo, last, profile
+                $user = new User();
+                $user->setUserId($_POST['user_id']);
+                $user->setEmail($_POST['email']);
+                $user->setUsername($_POST['username']);
+                $user->setUserPassword($_POST['password']);
+                $user->setFirstName($_POST['first_name']);
+                $user->setLastName($_POST['last_name']);
+                $user->setGender($_POST['gender']);
+                $user->setBirthDate($_POST['birth_date']);
+                $user->setVisibility($_POST['visibility']);
+                $user->setProfileImage(isset($_POST['profile_image']) ? $_POST['profile_image'] : null);
+                echo json_encode(['success' => $user->update()]);
                 break;
             //case 'update':
             //    

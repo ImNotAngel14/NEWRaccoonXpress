@@ -23,7 +23,10 @@ BEGIN
     `birth_date` = `p_birth_date`,
     `gender` = `p_gender`,
     `visibility` = `p_visibility`,
-    `profile_image` = `p_profile_image`
+    `profile_image` = CASE 
+            WHEN `p_profile_image` IS NOT NULL THEN `p_profile_image`
+            ELSE `profile_image`
+        END
     WHERE `user_id` = `p_user_id`;
 END;//
 

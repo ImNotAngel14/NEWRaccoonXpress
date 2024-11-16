@@ -99,6 +99,7 @@
                             <li><a class="dropdown-item" href="index.php?controller=user&action=showProfile">Perfil</a></li>
                             <li><a class="dropdown-item" href="index.php?controller=user&action=logout">Cerrar sesión</a></li>
                             <script>
+                                /*
                                 document.addEventListener('DOMContentLoaded', () => {
                                     document.getElementById("log_out_button").addEventListener("click", async function(event) {
                                         event.preventDefault();
@@ -122,6 +123,7 @@
                                         }
                                     });
                                 });
+                                */
                             </script>
                         </ul>
                     </li>

@@ -71,7 +71,16 @@
 
         public function Register()
         {
-            if (isset($_POST['username']) && isset($_POST['password'])) 
+            if (
+                isset($_POST['username']) 
+                && isset($_POST['password']) 
+                && isset($_POST['email'])
+                && isset($_POST['first_name'])
+                && isset($_POST['last_name'])
+                && isset($_POST['birth_date'])
+                && isset($_POST['gender'])
+                && isset($_POST['user_role'])
+                ) 
             {
                 
                 $username = $_POST['username'];
@@ -80,8 +89,8 @@
                 $first_name = $_POST['first_name'];
                 $last_name = $_POST['last_name'];
                 $birth_date = $_POST['birth_date'];
-                $gender = $_POST['gender'];
-                $user_role = $_POST['user_role'];
+                $gender = (int)$_POST['gender'];
+                $user_role = (int)$_POST['user_role'];
                 // La URL de la API local (ajusta la URL de acuerdo a tu configuración)
                 $url = "http://localhost/NEWRaccoonXpress/api/usersAPI.php?action=register";
 
@@ -275,6 +284,90 @@
                 } else {
                     return ['user_info' => null, 'message' => 'Error al obtener la información'];
                 }
+            }
+        }
+
+        public function UpdateUser()
+        {
+            if (
+                isset($_POST['username']) 
+                && isset($_POST['password']) 
+                && isset($_POST['email'])
+                && isset($_POST['first_name'])
+                && isset($_POST['last_name'])
+                && isset($_POST['birth_date'])
+                && isset($_POST['gender'])
+                ) 
+            {
+                if(isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK)
+                {
+                    $fileTmpPath = $_FILES['profile_image']['tmp_name'];
+                    $imageData = file_get_contents($fileTmpPath);
+                }
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
+                $userId = (int)$_SESSION['user'];
+                $username = $_POST['username'];
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                $first_name = $_POST['first_name'];
+                $last_name = $_POST['last_name'];
+                $birth_date = $_POST['birth_date'];
+                $gender = (int)$_POST['gender'];
+                $visibility = isset($_POST['visibility']);
+                $profile_image = isset($imageData) ? $imageData : null;
+                // La URL de la API local (ajusta la URL de acuerdo a tu configuración)
+                $url = "http://localhost/NEWRaccoonXpress/api/usersAPI.php?action=update";
+
+                // Inicializa una sesión cURL
+                $ch = curl_init();
+
+                // Configura la solicitud cURL
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Para que se devuelva la respuesta en vez de imprimirla
+                curl_setopt($ch, CURLOPT_POST, true); // Hacemos una solicitud POST
+
+                // Los datos a enviar a la API
+                $data = [
+                    'user_id' => $userId,
+                    'username' => $username,
+                    'password' => $password,
+                    'email' => $email,
+                    'first_name' => $first_name,
+                    'last_name' => $last_name,
+                    'birth_date' => $birth_date,
+                    'gender' => $gender,
+                    'visibility' => $visibility,
+                    'profile_image' => $profile_image
+                ];
+                // Añade los datos a la solicitud POST
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+                // Ejecuta la solicitud y guarda la respuesta
+                $response = curl_exec($ch);
+
+                // Verifica si ocurrió algún error
+                if ($response === false) {
+                    echo "cURL Error: " . curl_error($ch);
+                }
+
+                // Cierra la sesión cURL
+                curl_close($ch);
+
+                // Procesa la respuesta, si la API devuelve JSON, por ejemplo:
+                $data = json_decode($response, true);
+                // Muestra la respuesta (esto depende de lo que haga tu API)
+                if (isset($data['success'])) {
+                    echo json_encode(['success' => (bool)$data['success']]);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Error en el registro']);
+                }
+                exit;
+            }
+            else
+            {
+                echo json_encode(['success' => false, 'message' => 'No se recibieron los parámetros necesarios']);
+                exit;
             }
         }
     }

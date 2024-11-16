@@ -17,7 +17,7 @@ class User
     private $active;
     private $last_login_date;
     private $profile_image;
-
+//id, email, username,password, role, nombre, apellido, genero, cumple, visibili, activo, last, profile
     public function __construct($user_id = null, $email = null, $username = null, $user_password = null, $user_role = null, 
                                 $first_name = null, $last_name = null, $gender = null, $birth_date = null, 
                                 $visibility = null, $active = null, $last_login_date = null, $profile_image = null) 
@@ -130,13 +130,14 @@ class User
     {
         try
         {
-            $sql = "CALL `sp_update_user`(?,?,?,?,?,?,?,?);";
+            $sql = "CALL `sp_update_user`(?,?,?,?,?,?,?,?,?,?);";
             $database = new Database();
             $this->conn = $database->connect();
             $stmt = $this->conn->prepare($sql);
             // username, email, password, firstName, lastName, birthdate, gender, visibility
             $stmt->bind_param(
-                "ssssssii",
+                "issssssiis",
+                $this->user_id,
                 $this->username,
                 $this->email,
                 $this->user_password,
@@ -144,10 +145,15 @@ class User
                 $this->last_name,
                 $this->birth_date,
                 $this->gender,
-                $this->visibility
+                $this->visibility,
+                $this->profile_image             
             );
             $stmt->execute();
-            return $this->conn->affected_rows > 0;
+            if ($stmt->error) {
+                // Si hubo algún error en la ejecución
+                return false;
+            }
+            return true;
         }
         catch(mysqli_sql_exception $e)
         {

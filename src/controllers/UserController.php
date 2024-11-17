@@ -1,6 +1,8 @@
 <?php
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/NEWRaccoonXpress/src/models/User.php";
     class UserController
     {
+        private $userModel = null;
         public function ShowLogin()
         {
             require "src/views/login.php";
@@ -369,6 +371,13 @@
                 echo json_encode(['success' => false, 'message' => 'No se recibieron los parámetros necesarios']);
                 exit;
             }
+        }
+
+        public function SearchUsers($search)
+        {
+            $userModel = new User();
+            $users = $userModel->searchUsers($search);
+            return $users;
         }
     }
 ?>

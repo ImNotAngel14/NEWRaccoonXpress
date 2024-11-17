@@ -1,5 +1,6 @@
 <?php
-    require_once "ProductController.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/NEWRaccoonXpress/src/controllers/ProductController.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/NEWRaccoonXpress/src/controllers/UserController.php";
     //require_once "../models/Product.php";
     // require_once "../models/User.php";
 
@@ -22,25 +23,15 @@
             {
                 $search = $_GET['search'];
                 $filterOrder = isset($_GET['filter_order']) ? $_GET['filter_order'] : null;
-                // obtenemos los filtros
-                // UserController::ApplyFilters( 0, 0, 0);
                 // creamos los modelos
                 $productController = new ProductController();
-                
-                // $userModel = new User();
+                $userController = new UserController();
                 // llamamos al metodo de busqueda de productos
                 $products = $productController->GetProductsBySearch($search, $filterOrder); // productos que coincidan con los filtros
-                //$products = $productController->GetAllProducts();
-                // obtener resultados de busqueda para productos
-                // obtener resultados de busqueda para usuarios
+                $users = $userController->SearchUsers($search);
             }
             // imprimir los resultados
             require "src/views/search.php";
-        }
-
-        private function ApplyFilters($minPrice, $maxPrice, $filterOrder)
-        {
-
         }
     }
 ?>

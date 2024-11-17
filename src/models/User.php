@@ -1,5 +1,6 @@
 <?php
-require_once '../config/Database.php';
+//include '../config/Database.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . "/NEWRaccoonXpress/config/Database.php";
 
 /*
     `user_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador de usuario',
@@ -63,6 +64,31 @@ class User
         $this->active = $active;
         $this->last_login_date = $last_login_date;
         $this->profile_image = $profile_image;
+    }
+
+    public function searchUsers($search)
+    {
+        $sql = "SELECT `username`, `user_role`, `profile_image` FROM `users` WHERE `username` LIKE CONCAT('%', ?, '%');";
+        $database = new Database();
+        $this->conn = $database->connect();
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $search);
+        $stmt->execute();
+        if ($stmt->error) {
+            return null;
+        }
+        $result = $stmt->get_result();
+        if($result->num_rows > 0)
+        {
+            $users = [];
+
+            // Itera sobre los resultados y guárdalos en un arreglo
+            while ($row = $result->fetch_assoc()) 
+            {
+                $users[] = $row;
+            }
+            return $users;
+        }
     }
 
     public function registerUser(

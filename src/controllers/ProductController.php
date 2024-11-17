@@ -1,5 +1,5 @@
 <?php
-    require_once "src/models/Product.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/NEWRaccoonXpress/src/models/Product.php";
 
     class ProductController
     {

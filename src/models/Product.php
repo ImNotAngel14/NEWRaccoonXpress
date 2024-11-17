@@ -1,5 +1,5 @@
 <?php
-require_once 'config/Database.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . "/NEWRaccoonXpress/config/Database.php";
 /*
     `product_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador de producto',
     `product_name` VARCHAR(64) NOT NULL COMMENT 'Nombre del producto',

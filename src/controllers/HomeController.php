@@ -1,6 +1,6 @@
 <?php
-    require_once "UserController.php";
-    require_once "ProductController.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/NEWRaccoonXpress/src/controllers/UserController.php";
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/NEWRaccoonXpress/src/controllers/ProductController.php";
     class HomeController
     {
         public function Landing_page()

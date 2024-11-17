@@ -57,20 +57,56 @@
                     <div class="col-lg-10 col-12 p-4">
                         <div class="container">
                             <?php
-                                if($products)
+                                if($products || $users)
                                 {
-                                    foreach($products as $product)
+                                    echo "<div class='row row-xs-cols-1 row-sm-cols-2 row-cols-lg-3 row-cols-xl-4 g-4'>";
+                                    if($products)
                                     {
-                                        echo "<div class='row row-xs-cols-1 row-sm-cols-2 row-cols-lg-3 row-cols-xl-4 g-4'>";
-                                        $productId = $product['product_id'];
-                                        $productName = $product['product_name'];
-                                        $productImage = isset($product['image_1']) ? "data:image/png;base64," . base64_encode($product['image_1']) : '/NewRaccoonXpress/src/views/assets/switchLite.webp';
-                                        $productPrice = $product['price'];
-                                        $productQuotable = $product['quotable'];
-                                        $rating = $product['average_rating'];
-                                        $review_count = 1;
+                                        foreach($products as $product)
+                                        {
+                                            $productId = $product['product_id'];
+                                            $productName = $product['product_name'];
+                                            $productImage = isset($product['image_1']) ? "data:image/png;base64," . base64_encode($product['image_1']) : '/NewRaccoonXpress/src/views/assets/switchLite.webp';
+                                            $productPrice = $product['price'];
+                                            $productQuotable = $product['quotable'];
+                                            $rating = $product['average_rating'];
+                                            $review_count = 1;
+                                            include __DIR__ . '/layouts/product_template.php';
+                                        }
                                     }
-                                    include __DIR__ . '/layouts/product_template.php';
+                                    if($users)
+                                    {
+                                        foreach($users as $user)
+                                        {
+                                            $user_profile_image = isset($user['profile_image']) ? "data:image/png;base64," . base64_encode($user['profile_image']) : '/NewRaccoonXpress/src/views/assets/no-profile-user.png';
+                                            switch((int)$user['user_role'])
+                                            {
+                                                case 0:
+                                                    $result_user_role = "Administrador";
+                                                    break;
+                                                case 1:
+                                                    $result_user_role = "Vendedor";
+                                                    break;
+                                                case 2:
+                                                    $result_user_role = "Comprador";
+                                                    break;
+                                            }
+                                            echo "
+                                            <div class='col d-inline-flex justify-content-center'>
+                                                <div class='card' style='width: 18rem;'>
+                                                    <a href='#' style='color: black; text-decoration: none;'>
+                                                        <!-- Image -->
+                                                        <img src='". $user_profile_image . "' class='card-img-top' alt='' style='height: 18rem; object-fit: contain; image-rendering: pixelated;'>
+                                                        <div class='card-body'>
+                                                            <!-- Name -->
+                                                            <p class='card-text'>" . $user['username'] . "</p>
+                                                            <p class='card-text'><small class='text-body-secondary'>(" . $result_user_role . ")</small></p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>";
+                                        }
+                                    }
                                 }    
                                 else
                                 {

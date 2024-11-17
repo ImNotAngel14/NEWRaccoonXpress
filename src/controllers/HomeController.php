@@ -1,5 +1,6 @@
 <?php
     require_once "UserController.php";
+    require_once "ProductController.php";
     class HomeController
     {
         public function Landing_page()
@@ -22,7 +23,20 @@
             {
                 $profileImage = "/NewRaccoonXpress/src/views/assets/no-profile-user.png";
             }
+            $productController = new ProductController();
+            $products = $productController->GetAllProducts();
             require "src/views/home.php";
+        }
+
+        public function test()
+        {
+            $productModel = new Product();
+            $products = $productModel->getAllProducts();
+            foreach($products as $product)
+            {
+                echo json_encode(["product" => $product['product_name']]);
+            }
+            exit;
         }
     }
 ?>

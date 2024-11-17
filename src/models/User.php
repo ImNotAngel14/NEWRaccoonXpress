@@ -1,6 +1,21 @@
 <?php
 require_once '../config/Database.php';
 
+/*
+    `user_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador de usuario',
+    `email` VARCHAR(64) NOT NULL UNIQUE COMMENT 'Correo electrónico del usuario',
+    `username` VARCHAR(32) NOT NULL UNIQUE COMMENT 'Nombre de usuario para la aplicación',
+    `user_password` VARCHAR(64) NOT NULL COMMENT 'Contraseña para el ingreso a la aplicación',
+    `user_role` INT NOT NULL COMMENT 'Identificador del rol de usuario',
+    `first_name` VARCHAR(64) NOT NULL COMMENT 'Primer nombre real del usuario',
+    `last_name` VARCHAR(64) NOT NULL COMMENT 'Apellido real del usuario',
+    `gender` INT NOT NULL COMMENT 'Género del usuario',
+    `birth_date` DATE NOT NULL COMMENT 'Fecha de nacimiento del usuario',
+    `visibility` TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Visibilidad del perfil del usuario',
+    `active` TINYINT(1) NOT NULL DEFAULT 1 COMMENT 'Bandera de usuario activo',
+    `last_login_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP() COMMENT 'fecha del último ingreso al portal',
+    `profile_image` BLOB COMMENT 'Imagen del perfil del usuario'
+*/
 class User 
 {
     private $conn = null;
@@ -17,10 +32,23 @@ class User
     private $active;
     private $last_login_date;
     private $profile_image;
-//id, email, username,password, role, nombre, apellido, genero, cumple, visibili, activo, last, profile
-    public function __construct($user_id = null, $email = null, $username = null, $user_password = null, $user_role = null, 
-                                $first_name = null, $last_name = null, $gender = null, $birth_date = null, 
-                                $visibility = null, $active = null, $last_login_date = null, $profile_image = null) 
+    
+    public function __construct
+    (
+        $user_id = null, 
+        $email = null, 
+        $username = null, 
+        $user_password = null, 
+        $user_role = null,                    
+        $first_name = null, 
+        $last_name = null, 
+        $gender = null, 
+        $birth_date = null,               
+        $visibility = null, 
+        $active = null, 
+        $last_login_date = null, 
+        $profile_image = null
+    ) 
     {
         $this->user_id = $user_id;
         $this->email = $email;

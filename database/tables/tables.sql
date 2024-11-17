@@ -1,3 +1,10 @@
+-- Metodo de pago
+CREATE TABLE `paid_methods`
+(
+    `paid_method_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador del método de pago',
+    `method_name` VARCHAR(32) NOT NULL COMMENT 'Nombre del método de pago'
+);
+
 -- Usuarios
 CREATE TABLE `users` 
 (
@@ -46,6 +53,17 @@ CREATE TABLE `products`
         REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- Product files
+CREATE TABLE `product_files`
+(
+    `product_file_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador del archivo para el producto',
+    `product_id` INT NOT NULL COMMENT 'Identificador del producto al que pertenece el archivo',
+    `file` LONGBLOB COMMENT 'Datos binarios del archivo almacenado',
+    CONSTRAINT `fk_product_files_product_id_products`
+        FOREIGN KEY (`product_id`)
+        REFERENCES `products` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 -- Categorias del producto
 CREATE TABLE `product_categories`
 (
@@ -73,6 +91,34 @@ CREATE TABLE `shopping_carts`
     CONSTRAINT `fK_shopping_carts_user_id_users`
         FOREIGN KEY (`user_id`) 
         REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Listas
+CREATE TABLE `lists`
+(
+    `list_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Identificador de la lista de productos',
+    `user_id` INT NOT NULL COMMENT 'Identificador del comprador',
+    `title` VARCHAR(32) NOT NULL COMMENT 'Titulo de la lista',
+    `description` VARCHAR(180) COMMENT 'Descripción de la lista',
+    `visibility` TINYINT(1) DEFAULT 0 NOT NULL COMMENT 'Bandera de visibilidad de la lista',
+    `list_image` BLOB NULL COMMENT 'Imagen de la lista',
+    CONSTRAINT `fk_lists_user_id_users`
+        FOREIGN KEY (`user_id`)
+        REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ObjetosLista
+CREATE TABLE `list_items`
+(
+    `list_item_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Identificador del producto en la lista',
+    `list_id` INT NOT NULL COMMENT 'Identificador de la lista a la que pertenecen los productos',
+    `product_id` INT NOT NULL COMMENT 'Identificador del producto en la lista',
+    CONSTRAINT `fk_list_items_list_id_lists`
+        FOREIGN KEY (`list_id`)
+        REFERENCES `lists` (`list_id`),
+    CONSTRAINT `fk_list_items_product_id_products`
+        FOREIGN KEY (`product_id`)
+        REFERENCES `products` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- chats
@@ -110,57 +156,7 @@ CREATE TABLE `messages`
         REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---Reviews
-CREATE TABLE `reviews`
-(
-    `review_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Identificador de la reseña',
-    `product_purchase_id` INT NOT NULL COMMENT 'Identificador del producto de la compra a la que hace referencia',
-    `title` VARCHAR(32) NOT NULL COMMENT 'Titulo de la reseña',
-    `review_body` VARCHAR(180) NOT NULL COMMENT 'Cuerpo de la reseña',
-    `rate` INT NOT NULL COMMENT 'Calificación del producto',
-    `active` TINYINT(1) NOT NULL COMMENT 'Bandera de reseña activa',
-    `created_at` DATETIME NOT NULL COMMENT 'Fecha y hora del envío del mensaje',
-    CONSTRAINT `fk_reviews_product_purchase_id_sale_details`
-        FOREIGN KEY (`product_purchase_id`)
-        REFERENCES `sale_details` (`sale_details_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---Listas
-CREATE TABLE `lists`
-(
-    `list_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Identificador de la lista de productos',
-    `user_id` INT NOT NULL COMMENT 'Identificador del comprador',
-    `title` VARCHAR(32) NOT NULL COMMENT 'Titulo de la lista',
-    `description` VARCHAR(180) COMMENT 'Descripción de la lista',
-    `visibility` TINYINT(1) DEFAULT 0 NOT NULL COMMENT 'Bandera de visibilidad de la lista',
-    `list_image` BLOB NULL COMMENT 'Imagen de la lista',
-    CONSTRAINT `fk_lists_user_id_users`
-        FOREIGN KEY (`user_id`)
-        REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---ObjetosLista
-CREATE TABLE `list_items`
-(
-    `list_item_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Identificador del producto en la lista',
-    `list_id` INT NOT NULL COMMENT 'Identificador de la lista a la que pertenecen los productos',
-    `product_id` INT NOT NULL COMMENT 'Identificador del producto en la lista',
-    CONSTRAINT `fk_list_items_list_id_lists`
-        FOREIGN KEY (`list_id`)
-        REFERENCES `lists` (`list_id`),
-    CONSTRAINT `fk_list_items_product_id_products`
-        FOREIGN KEY (`product_id`)
-        REFERENCES `products` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Metodo de pago
-CREATE TABLE `paid_methods`
-(
-    `paid_method_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador del método de pago',
-    `method_name` VARCHAR(32) NOT NULL COMMENT 'Nombre del método de pago'
-);
-
---Ventas
+-- Ventas
 CREATE TABLE `sales`
 (
     `sale_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador de la venta',
@@ -168,16 +164,16 @@ CREATE TABLE `sales`
     `sale_datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP() COMMENT 'Fecha y hora en la que se realizó la venta',
     `amount_paid_total` DECIMAL(10,2) NOT NULL COMMENT 'Cantidad pagada en la compra',
     `discount` DECIMAL(10,2) DEFAULT 0 NOT NULL COMMENT 'Cantidad descontada a la compra',
-    `paid_method` VARHCAR(32) NOT NULL COMMENT 'Nombre del método de pago',
+    `paid_method` VARCHAR(32) NOT NULL COMMENT 'Nombre del método de pago',
     CONSTRAINT `fk_sales_buyer_id_users`
-        FOREIGN KEY (`buyer_id`),
+        FOREIGN KEY (`buyer_id`)
         REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---Ventas detalle 
+-- Ventas detalle 
 CREATE TABLE `sale_details`
 (
-    `sale_details_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Identificador del articulo de la venta',
+    `sale_details_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Identificador del articulo de la venta',
     `sale_id` INT NOT NULL COMMENT 'Identificador de la venta',
     `product_id` INT NOT NULL COMMENT 'Idenfiticador del producto comprado',
     `quantity` INT NOT NULL COMMENT 'Cantidad del producto comprado',
@@ -189,5 +185,21 @@ CREATE TABLE `sale_details`
         REFERENCES `sales` (`sale_id`),
     CONSTRAINT `fk_sale_details_product_id_products`
         FOREIGN KEY (`product_id`)
-        REFERENCES `products` (`product_id`),
-);
+        REFERENCES `products` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Reviews
+CREATE TABLE `reviews`
+(
+    `review_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Identificador de la reseña',
+    `product_purchase_id` INT NOT NULL COMMENT 'Identificador del producto de la compra a la que hace referencia',
+    `title` VARCHAR(32) NOT NULL COMMENT 'Titulo de la reseña',
+    `review_body` VARCHAR(180) NOT NULL COMMENT 'Cuerpo de la reseña',
+    `rate` INT NOT NULL COMMENT 'Calificación del producto',
+    `active` TINYINT(1) NOT NULL COMMENT 'Bandera de reseña activa',
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP() COMMENT 'Fecha y hora del envío del mensaje',
+    CONSTRAINT `fk_reviews_product_purchase_id_sale_details`
+        FOREIGN KEY (`product_purchase_id`)
+        REFERENCES `sale_details` (`sale_details_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+

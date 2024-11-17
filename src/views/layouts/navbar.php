@@ -56,7 +56,7 @@
             ?>
             
         </div>
-        <a class='navbar-brand d-flex justify-content-center' href='../../index.php'>
+        <a class='navbar-brand d-flex justify-content-center' href='index.php'>
             <img src='/NewRaccoonXpress/src/views/assets/Imagotipo.png' alt='' style='height: 3rem; object-fit: contain;'>
         </a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -68,20 +68,22 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <?php 
-                            if($user_role == 2)
+                            if($user_role == 1)
                             {
                                 echo "<li><a class='dropdown-item' href='#'>Crear categoria</a></li>";
                             }
                         ?>
-                        <li><a class="dropdown-item" href="#"><?php echo htmlspecialchars($hola); ?></a></li>
+                        <li><a class="dropdown-item" href="#"></a></li>
                         <li><a class="dropdown-item" href="#">Ingles</a></li>
                         <li><a class="dropdown-item" href="#">Web development</a></li>
                     </ul>
                 </li>
                 <!-- Search bar -->
                 <li class="nav-item col-lg-6 container-fluid align-self-center mx-0">
-                    <form class="d-flex" role="search" method="get" action="search.php">
+                    <form class="d-flex" role="search" method="get" action="index.php?controller=search&action=search">
                         <div class="input-group">
+                            <input type="hidden" name="controller" value="search">
+                            <input type="hidden" name="action" value="search">
                             <input class="form-control" type="search" placeholder="Buscar..." aria-label="Search" name='search'>
                             <button class="btn my-secondary " type="submit"><i class="bi bi-search"></i></button>
                         </div>
@@ -98,33 +100,6 @@
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="index.php?controller=user&action=showProfile">Perfil</a></li>
                             <li><a class="dropdown-item" href="index.php?controller=user&action=logout">Cerrar sesión</a></li>
-                            <script>
-                                /*
-                                document.addEventListener('DOMContentLoaded', () => {
-                                    document.getElementById("log_out_button").addEventListener("click", async function(event) {
-                                        event.preventDefault();
-                                        try
-                                        {
-                                            const response = await fetch('http://localhost/NewRaccoonXpress/api/usersAPI.php?action=logout', {
-                                                method: "POST"
-                                            });
-                                            const result = await response.json();
-                                            if (result.logout) {
-                                                // Redirige al usuario a la página de inicio o de login
-                                                window.location.href = "landing_page.php";
-                                                localStorage.removeItem('user_id');
-                                                localStorage.removeItem('user_role');
-                                            } else {
-                                                console.error("Error al cerrar sesión:", response.statusText);
-                                            }
-                                        }
-                                        catch (error) {
-                                            console.error("Error:", error);
-                                        }
-                                    });
-                                });
-                                */
-                            </script>
                         </ul>
                     </li>
                     <!-- Role Buttons -->

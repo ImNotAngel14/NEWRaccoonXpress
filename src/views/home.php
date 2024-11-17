@@ -19,13 +19,21 @@
                 <div class="row row-xs-cols-1 row-sm-cols-2 row-md-cols-3 row-cols-lg-4 g-4">
                     <!-- Productos -->
                     <?php
-                        $productId = 1;
-                        $productName = 'Nintendo Lite Switch Lite 32GB Standard color turquesa 2017';
-                        $productImage = '/NewRaccoonXpress/src/views/assets/switchLite.webp';
-                        $productPrice = 59.99;
-                        $review_count = 1;
-                        $rating = 3;
-                        include __DIR__ . '/layouts/product_template.php';
+                        if($products)
+                        {
+                            foreach($products as $product)
+                            {
+                                $productId = $product['product_id'];
+                                $productName = $product['product_name'];
+                                $productImage = '/NewRaccoonXpress/src/views/assets/switchLite.webp'; // temporal
+                                $productPrice = $product['price'];
+                                $productQuotable = $product['quotable'];
+                                $rating = $product['average_rating'];
+                                $review_count = 1;
+                            }
+                            include __DIR__ . '/layouts/product_template.php';
+                        }
+                        
                     ?>
                 </div>
             </div>

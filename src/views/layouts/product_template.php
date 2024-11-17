@@ -3,7 +3,7 @@
         <a href='product.php?product=<?php echo htmlspecialchars($productId); ?>' style='color: black; text-decoration: none;'>
             <!-- Image -->
             <!--img src='data:image/png;base64,<?php echo htmlspecialchars($productImage);?>' class='card-img-top' alt='' style='height: 18rem; object-fit: contain;'-->
-            <img src='<?php echo htmlspecialchars($productImage);?>' class='card-img-top' alt='' style='height: 18rem; object-fit: contain;'>
+            <img src='<?php echo htmlspecialchars($productImage);?>' class='card-img-top' alt='' style='height: 18rem; object-fit: contain; image-rendering: pixelated;'>
 
             <div class='card-body'>
                 <!-- Name -->

@@ -12,9 +12,9 @@
             return $products;
         }
 
-        public function Product_details()
+        public function ProductDetails()
         {
-            
+            require "src/views/product_details.php";
         }
 
         public function GetProductsBySearch($search)

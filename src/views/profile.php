@@ -22,7 +22,7 @@
                                 <i class="bi bi-pencil-square"></i>
                             </button>
                         </div>
-                        <img id="profile_image" class="container-fluid img-fluid p-5 text-center " src="<?php echo $profileImage ?>" alt="" style='border-radius: 50%; image-rendering: pixelated;'>
+                        <img id="profile_image" class="container-fluid img-fluid p-5 text-center " src="<?php echo $profileImage ?>" alt="" style='height:30rem; width:30rem; border-radius: 50%; image-rendering: pixelated;'>
                         <h5 class="card-subtitle mb-4 text-body-secondary text-center "><?php echo htmlspecialchars($role); ?></h5>
                         <p class="card-text text-start <?php if(!$email)    {echo "d-none";}  ?>"><b>Correo : </b><?php echo htmlspecialchars($email); ?></p>
                         <p class="card-text text-start <?php if(!$firstname){echo "d-none";}  ?>"><b>Nombre completo : </b><?php echo htmlspecialchars($firstname . " " . $lastname); ?></p>

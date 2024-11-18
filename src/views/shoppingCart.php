@@ -10,49 +10,47 @@
     <?php
         include __DIR__ . '/layouts/navbar.php';
     ?>
-    <div class="container-fluid d-flex justify-content-around">
+    <div class="container p-4">
         <!-- Content -->
         <div class="row justify-content-center w-100 h-90 p-4">
-            <div class="col-md-6">
-                <div class="card mb-3 p-4">
-                    <div class="row g-0">
-                        <!-- Imagen -->
-                        <div class="col-md-3 d-flex align-items-center">
-                            <img src="/NewRaccoonXpress/src/views/assets/no-profile-user.png" class="img-fluid rounded-start p-4" alt="..." style="height: 12rem; width:12rem; object-fit: contain; image-rendering: pixelated;">
-                        </div>
-                        <div class="col-md-5 ">
-                            <div class="card-body">
-                                <!-- Titulo -->
-                                <h5 class="card-title"><b>Producto</b></h5>
-                            </div>
-                        </div>
-                        <div class="col-md-2 d-flex align-items-center">
-                            <div class="input-group mb-3">
-                                <button class="btn my-outline-gray" type="button">-</button>
-                                <input type="text" class="form-control my-outline-gray text-center" placeholder="" value="0">
-                                <button class="btn my-outline-gray" type="button">+</button>
-                            </div>
-                        </div>
-                        <div class="col-md-2 d-flex align-items-center justify-content-center p-4">
-                            <div class="d-flex align-items-center">
-                                <h5>$0.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- Shopping Cart Item -->
+            <?php
+                if($shoppingCartItems)
+                {
+                    $subtotal = 0.0;
+                    foreach($shoppingCartItems as $shoppingCartItem)
+                    {
+                        $shoppingCartId = $shoppingCartItem['shoppingCart_id'];
+                        $shoppingCartProductName = $shoppingCartItem['product_name'];
+                        $shoppingCartPrice = $shoppingCartItem['price'];
+                        $shoppingCartProductQuantity = $shoppingCartItem['product_quantity'];
+                        $shoppingCartQuantity = $shoppingCartItem['cart_quantity'];
+                        if(isset($shoppingCartItem['image_1']))
+                        {
+                            $shoppingCartProductImage = "data:image/png;base64," . base64_encode($shoppingCartItem['image_1']);
+                        }
+                        else
+                        {
+                            $shoppingCartProductImage = "/NewRaccoonXpress/src/views/assets/no-profile-user.png";
+                        }
+                        $subtotal += $shoppingCartPrice * $shoppingCartQuantity;
+                        include __DIR__ . '/layouts/list_item_template.php';
+                    }  
+                }
                 
-            </div>
+            ?>
+            <!-- Purchase form -->
             <div class="col-md-4 d-flex justify-content-center align-items-start">
-                <div class="card text-center mb-3" style="width: 18rem;">
-                    <div class="card-header">
-                        Resumen de compra
+                <form action="">
+                    <div class="card text-center mb-3" style="width: 18rem;">
+                        <div class="card-header">Resumen de compra</div>
+                        <div class="card-body text-start">
+                            <p class="card-text mb-5">Productos: $<?php echo htmlspecialchars((float)$subtotal)?></p>
+                            <h5 class="card-title mb-2">Total: $<?php echo htmlspecialchars((float)$subtotal)?></h5>
+                            <a href="#" class="btn w-100 my-primary">Procesar pago</a>
+                        </div>
                     </div>
-                    <div class="card-body text-start">
-                        <p class="card-text mb-5">Productos: $0.00</p>
-                        <h5 class="card-title">Total: $0.00</h5>
-                        <a href="#" class="btn w-100 my-primary">Procesar pago</a>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

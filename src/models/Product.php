@@ -51,7 +51,7 @@ class Product
 
     public function getAllProducts()
     {        
-        $sql = "SELECT `product_id`, `product_name`, `description`, `quotable`, `price`, `price`, `quantity`, `active`, `approved_by`, `average_rating` FROM `product_overview`;";
+        $sql = "SELECT `product_id`, `product_name`, `description`, `quotable`, `price`, `price`, `quantity`, `active`, `approved_by`, `average_rating`, `image_1` FROM `product_overview`;";
         $database = new Database();
         try
         {

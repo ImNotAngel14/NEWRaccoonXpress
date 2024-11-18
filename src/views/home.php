@@ -25,7 +25,14 @@
                             {
                                 $productId = $product['product_id'];
                                 $productName = $product['product_name'];
-                                $productImage = '/NewRaccoonXpress/src/views/assets/switchLite.webp'; // temporal
+                                if(isset($product['image_1']))
+                                {
+                                    $productImage = "data:image/png;base64," . base64_encode($product['image_1']);
+                                }
+                                else
+                                {
+                                    $productImage = '/NewRaccoonXpress/src/views/assets/switchLite.webp';
+                                }
                                 $productPrice = $product['price'];
                                 $productQuotable = $product['quotable'];
                                 $rating = $product['average_rating'];

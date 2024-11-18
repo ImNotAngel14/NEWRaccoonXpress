@@ -17,7 +17,7 @@ CREATE TABLE `users`
     `last_name` VARCHAR(64) NOT NULL COMMENT 'Apellido real del usuario',
     `gender` INT NOT NULL COMMENT 'Género del usuario',
     `birth_date` DATE NOT NULL COMMENT 'Fecha de nacimiento del usuario',
-    `visibility` TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Visibilidad del perfil del usuario',
+    `visibility` TINYINT(1) NOT NULL DEFAULT 1 COMMENT 'Visibilidad del perfil del usuario',
     `active` TINYINT(1) NOT NULL DEFAULT 1 COMMENT 'Bandera de usuario activo',
     `last_login_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP() COMMENT 'fecha del último ingreso al portal',
     `profile_image` BLOB COMMENT 'Imagen del perfil del usuario'  

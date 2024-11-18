@@ -81,10 +81,10 @@ CREATE TABLE `product_categories`
 -- Carrito de compras REVISAR
 CREATE TABLE `shopping_carts`
 (
-    `shoppingCart_id` INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador del producto en el carrito',
     `quantity` INT COMMENT 'Cantidad en el carrito',
     `product_id` INT NOT NULL COMMENT 'Identificador del producto relacionado con el carrito',
     `user_id` INT NOT NULL COMMENT 'Identificador del usuario dueño del carrito',
+    PRIMARY KEY(`user_id`, `product_id`),
     CONSTRAINT `fk_shopping_carts_product_id_products`
         FOREIGN KEY (`product_id`) 
         REFERENCES `products` (`product_id`),

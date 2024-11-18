@@ -33,7 +33,7 @@
                     <a class="nav-link" href="#"><i class="bi bi-bell"></i></a>
                 </li>
                 <li class="nav-item d-flex justify-content-center d-none d-lg-block">
-                    <a class="nav-link" href="#"><i class="bi bi-cart"></i></a>
+                    <a class="nav-link" href="index.php?controller=shoppingCart&action=showShoppingCart"><i class="bi bi-cart"></i></a>
                 </li>';
             break;
     }

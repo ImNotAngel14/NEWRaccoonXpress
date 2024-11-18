@@ -12,33 +12,34 @@
     ?>
     <div class="container p-4">
         <!-- Content -->
-        <div class="row justify-content-center w-100 h-90 p-4">
-            <!-- Shopping Cart Item -->
-            <?php
-                if($shoppingCartItems)
-                {
+        <div class="row justify-content-center w-100 h-90 p-4" >
+            <div class="col-md-8" id="cart-items">
+                <!-- Shopping Cart Item -->
+                <?php
                     $subtotal = 0.0;
-                    foreach($shoppingCartItems as $shoppingCartItem)
+                    if($shoppingCartItems)
                     {
-                        $shoppingCartId = $shoppingCartItem['shoppingCart_id'];
-                        $shoppingCartProductName = $shoppingCartItem['product_name'];
-                        $shoppingCartPrice = $shoppingCartItem['price'];
-                        $shoppingCartProductQuantity = $shoppingCartItem['product_quantity'];
-                        $shoppingCartQuantity = $shoppingCartItem['cart_quantity'];
-                        if(isset($shoppingCartItem['image_1']))
+                        foreach($shoppingCartItems as $shoppingCartItem)
                         {
-                            $shoppingCartProductImage = "data:image/png;base64," . base64_encode($shoppingCartItem['image_1']);
-                        }
-                        else
-                        {
-                            $shoppingCartProductImage = "/NewRaccoonXpress/src/views/assets/no-profile-user.png";
-                        }
-                        $subtotal += $shoppingCartPrice * $shoppingCartQuantity;
-                        include __DIR__ . '/layouts/list_item_template.php';
-                    }  
-                }
-                
-            ?>
+                            $shoppingCartProductId = $shoppingCartItem['product_id'];
+                            $shoppingCartProductName = $shoppingCartItem['product_name'];
+                            $shoppingCartPrice = $shoppingCartItem['price'];
+                            $shoppingCartProductQuantity = $shoppingCartItem['product_quantity'];
+                            $shoppingCartQuantity = $shoppingCartItem['cart_quantity'];
+                            if(isset($shoppingCartItem['image_1']))
+                            {
+                                $shoppingCartProductImage = "data:image/png;base64," . base64_encode($shoppingCartItem['image_1']);
+                            }
+                            else
+                            {
+                                $shoppingCartProductImage = "/NewRaccoonXpress/src/views/assets/no-profile-user.png";
+                            }
+                            $subtotal += $shoppingCartPrice * $shoppingCartQuantity;
+                            include __DIR__ . '/layouts/list_item_template.php';
+                        }  
+                    }
+                ?>
+            </div>
             <!-- Purchase form -->
             <div class="col-md-4 d-flex justify-content-center align-items-start">
                 <form action="">
@@ -55,5 +56,6 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="/NewRaccoonXpress/src/views/js/shoppingCart.js"></script>
 </body>
 </html>

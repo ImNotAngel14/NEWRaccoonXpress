@@ -1,6 +1,5 @@
 CREATE VIEW `shopping_cart_view` AS
     SELECT 
-        `sc`.`shoppingCart_id`, 
         `sc`.`quantity` AS `cart_quantity`, 
         `sc`.`product_id`, 
         `sc`.`user_id`,

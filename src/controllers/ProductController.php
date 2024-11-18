@@ -14,6 +14,7 @@
 
         public function ProductDetails()
         {
+            // cargar informacion del producto
             require "src/views/product_details.php";
         }
 

@@ -58,6 +58,11 @@
                         <!-- Price -->
                         <h1 class="card-title mb-3">$349.00</h1>
                         <!-- Cantidad -->
+                        <div class="input-group">
+                            <button class="btn btn-danger quantityDown" id="quantityDown" data-product-id="<?php echo htmlspecialchars((int)$shoppingCartProductId) ?>" type="button">-</button>
+                            <input type="text" class="form-control my-outline-gray text-center" data-product-id="<?php echo htmlspecialchars((int)$shoppingCartProductId) ?>" placeholder="" max="<?php  echo htmlspecialchars((int)$shoppingCartProductQuantity); ?>" value="<?php  echo htmlspecialchars($shoppingCartQuantity); ?>">
+                            <button class="btn btn-primary quantityUp" id="quantityUp" data-product-id="<?php echo htmlspecialchars((int)$shoppingCartProductId) ?>" type="button">+</button>
+                        </div>
                         <p class="card-text mb-3"><small class="text-body-secondary">200 disponibles</small></p>
                         <a href="#" class="btn my-primary w-100 mb-3">Agregar al carrito</a>
                     </div>

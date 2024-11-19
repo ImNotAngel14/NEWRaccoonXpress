@@ -49,6 +49,40 @@ class Product
         $this->average_rating = $average_rating;
     }
 
+    public function createProduct($user_id, $product_name, $description, $quotable, $price, $quantity, $category_id, $imageData, $imageData2, $imageData3, $video)
+    {
+        $sql = "INSERT INTO `products`(`product_name`,`description`,`quotable`,`price`,`quantity`,`created_by`,`image_1`,`image_2`,`image_3`,`video`) VALUES (?,?,?,?,?,?,?,?,?,?);";
+        $database = new Database();
+        try{
+            $this->conn = $database->connect();
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param(
+                "ssifiissss",
+                $product_name,
+                $description,
+                $quotable,
+                $price,
+                $quantity,
+                $user_id,
+                $imageData,
+                $imageData2,
+                $imageData3,
+                $video
+            );
+            $stmt->execute();
+            if ($stmt->error) {
+                return false;
+            }
+            return true;
+        }
+        catch(mysqli_sql_exception $e)
+        {
+            error_log($e . "\r\n", 3, "../logs/error_logs.log");
+            return false;
+        }
+        
+    }
+
     public function getProduct($productId)
     {
         $sql = "SELECT * FROM `product_overview` WHERE `product_id` = ?;";

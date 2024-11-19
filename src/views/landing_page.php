@@ -5,7 +5,7 @@
     include __DIR__ . '/layouts/general_header.php';
     ?>
     <link rel="stylesheet" href="/NewRaccoonXpress/src/views/css/landing_page.css">
-    <title>Home</title>
+    <title>Inicio</title>
 </head>
 <body>
     <div class="container d-flex justify-content-center">

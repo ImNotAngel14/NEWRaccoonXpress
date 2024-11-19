@@ -4,7 +4,7 @@
     <?php
         include __DIR__ . '/layouts/general_header.php';
     ?>
-    <title>Home</title>
+    <title>Carrito de compras</title>
 </head>
 <body>
     <?php

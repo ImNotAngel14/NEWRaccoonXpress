@@ -48,8 +48,12 @@ CREATE TABLE `products`
     `quantity` INT NOT NULL COMMENT 'Cantidad del producto',
     `active` TINYINT(1) COMMENT 'Bandera de producto activado',
     `approved_by` INT COMMENT 'Identificador del usuario administrador quien aprovó el producto',
+    `created_by` INT COMMENT 'Identificador del usuario quien creo el producto'
     CONSTRAINT `fk_products_approved_by_users`
         FOREIGN KEY (`approved_by`)
+        REFERENCES `users` (`user_id`),
+    CONSTRAINT `fk_products_created_by_users`
+        FOREIGN KEY(`created_by`)
         REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

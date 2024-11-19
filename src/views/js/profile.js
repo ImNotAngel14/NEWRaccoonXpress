@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log(result);
                 if (result.success) 
                 {
-                    window.location.href = 'index.php?controller=user&action=showProfile';
+                    location.reload();
                 } 
                 else 
                 {

@@ -4,7 +4,7 @@
     <?php
     include __DIR__ . '/layouts/general_header.php';
     ?>
-    <title>Home</title>
+    <title>Detalles</title>
 </head>
 <body>
     <?php
@@ -20,24 +20,28 @@
                 <div class="container">
                     <div class="row d-flex align-items-center">
                         <div class="col m-4 d-flex align-items-center justify-content-center" style="width: 12rem; height: 12rem; background-color: white;">
-                            <img src="https://http2.mlstatic.com/D_NQ_NP_991359-MLU73428562071_122023-O.webp" alt="" class="img-fluid container-fluid" style='object-fit: contain; image-rendering: pixelated;'>
+                            <img src="<?php echo htmlspecialchars($productImage2) ?>" alt="" class="img-fluid container-fluid p-4" style='object-fit: contain; image-rendering: pixelated;'>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col m-4 d-flex align-items-center justify-content-center" style="width: 12rem; height: 12rem; background-color: white;">
-                            <img src="https://http2.mlstatic.com/D_NQ_NP_612208-MLU73429065141_122023-O.webp" alt="" class="img-fluid container-fluid" style='object-fit: contain; image-rendering: pixelated;'>
+                            <img src="<?php echo htmlspecialchars($productImage3) ?>" alt="" class="img-fluid container-fluid p-4" style='object-fit: contain; image-rendering: pixelated;'>
                         </div>                    
                     </div>
                     <div class="row">
                         <div class="col m-4 d-flex align-items-center justify-content-center" style="width: 12rem; height: 12rem; background-color: white;">
-                            <img src="https://http2.mlstatic.com/D_NQ_NP_682465-MLU72475756449_102023-O.webp" alt="" class="img-fluid container-fluid g-0" style='object-fit: contain; image-rendering: pixelated;'>
+                            <img src="<?php echo htmlspecialchars($productImage1) ?>" alt="" class="img-fluid container-fluid p-4" style='object-fit: contain; image-rendering: pixelated;'>
                         </div>                    
                     </div>
                 </div>
             </div>
             <!-- Main file -->
+            
             <div class="col-md-6 d-flex align-self-center align-items-center justify-content-center" style="width: 30rem; height: 30rem; background-color: white;">
-                <img src="<?php echo htmlspecialchars($productImage1) ?>" alt="" class="img-fluid container-fluid p-4" style='object-fit: contain; image-rendering: pixelated;'>
+                <video controls>
+                    <source src="<?php echo htmlspecialchars($productVideo) ?>" type="video/webm">
+                    Tu navegador no soporta la reproducción de videos.
+                </video>    
             </div>
             <!-- Product information -->
             <div class="col-md-3 d-flex align-self-center m-4">

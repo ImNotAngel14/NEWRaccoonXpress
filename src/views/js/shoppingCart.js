@@ -28,19 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (input) 
                         {
                             location.reload();
-                            /*
-                            const itemSubtotal = document.querySelector(`h5[data-product-id="${productId}"]`);
-                            let oldSubtotal = parseFloat(itemSubtotal.textContent)/parseInt(input.value);
-                            input.value = operation ? parseInt(input.value) + 1 : parseInt(input.value) - 1;
-                            
-                            let newSubtotal = parseInt(input.value) * oldSubtotal;
-                            itemSubtotal.textContent = newSubtotal.toFixed(2);
-                            //itemSubtotal.textContent="$${newSubtotal.toFixed(2)}"
-                            if(input.value == 0)
-                            {
-                                location.reload();
-                            }
-                            */
                         }
                         else
                         {

@@ -50,11 +50,12 @@ switch ($method) {
                 if(isset($_SESSION['user']) && isset($_POST['product_id']) && isset($_POST['operation']))
                 {
                     $userId = $_SESSION['user'];
+                    $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 1;
                     $productId = $_POST['product_id'];
                     $operation = (bool)$_POST['operation'];
                     $shoppingCartModel = new ShoppingCartModel();
                     $success = ($operation) ? 
-                        $shoppingCartModel->addShoppingCartItem($userId, $productId)
+                        $shoppingCartModel->addShoppingCartItem($userId, $productId, $quantity)
                         : $shoppingCartModel->DecreaseProductQuantity($userId, $productId);
                 }
                 echo json_encode(['success' => $success]);

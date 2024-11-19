@@ -21,7 +21,8 @@
             $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1;
             $userId = (int)$_SESSION['user'];
             $shoppingCartModel = new ShoppingCartModel();
-            $shoppingCartModel->addShoppingCartItem($userId, $productId);
+            $shoppingCartModel->addShoppingCartItem($userId, $productId, $quantity);
+            header("Location: index.php?controller=shoppingCart&action=ShowShoppingCart");
         }
 
         public function quantityDown()

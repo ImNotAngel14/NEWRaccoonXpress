@@ -37,34 +37,54 @@
             </div>
             <!-- Main file -->
             <div class="col-md-6 d-flex align-self-center align-items-center justify-content-center" style="width: 30rem; height: 30rem; background-color: white;">
-                <img src="https://http2.mlstatic.com/D_NQ_NP_912915-MLU73449714572_122023-O.webp" alt="" class="img-fluid container-fluid p-4" style='object-fit: contain; image-rendering: pixelated;'>
+                <img src="<?php echo htmlspecialchars($productImage1) ?>" alt="" class="img-fluid container-fluid p-4" style='object-fit: contain; image-rendering: pixelated;'>
             </div>
             <!-- Product information -->
             <div class="col-md-3 d-flex align-self-center m-4">
                 <div class="card">
                     <div class="card-body">
                         <!-- Name -->
-                        <h5 class="card-title mb-3">Nintendo Switch Oled 64gb Edición Especial Mario Red Color Rojo</h5>
+                        <h5 class="card-title mb-3"><?php echo htmlspecialchars($productName) ?></h5>
                         <!-- Rating -->
                         <div class='rate-container mb-3'>
-                            <i class='bi bi-star-fill'></i>
-                            <i class='bi bi-star-fill'></i>
-                            <i class='bi bi-star-fill'></i>
-                            <i class='bi bi-star-fill'></i>
-                            <i class='bi bi-star'></i>
+                            <?php
+                                if($productUnitsSold > 0)
+                                {
+                                    for($i = 0; $i < 5; $i++)
+                                    {
+                                        # if($i < $rating)
+                                        if($i < $productRating)
+                                        {
+                                            echo "<i class='bi bi-star-fill'></i>";
+                                        }
+                                        else
+                                        {
+                                            echo "<i class='bi bi-star'></i>";
+                                        }
+                                    }
+                                    echo "<p class='card-text'><small class='text-body-secondary'>(" . $productUnitsSold . ")</small></p>";
+                                }
+                                else
+                                {
+                                    echo "<p class='card-text'><small class='text-body-secondary'>No hay suficientes reseñas</small></p>";
+                                }    
+                            ?>
                         </div>
                         <!-- Description -->
-                        <p class="card-text mb-5">1 Joy-Con grip, 1 dock, 1 cable HDMI, 2 correas para Joy-Con, 1 adaptador de corriente</p>
+                        <p class="card-text mb-3"><small class="text-body-secondary">Descripcion</small></p>
+                        <p class="card-text mb-5"><small class="text-body-secondary"><?php echo htmlspecialchars($productDescriotion) ?></small></p>
                         <!-- Price -->
-                        <h1 class="card-title mb-3">$349.00</h1>
+                        <h1 class="card-title mb-3">$<?php echo htmlspecialchars($productPrice) ?></h1>
                         <!-- Cantidad -->
-                        <div class="input-group">
-                            <button class="btn btn-danger quantityDown" id="quantityDown" data-product-id="<?php echo htmlspecialchars((int)$shoppingCartProductId) ?>" type="button">-</button>
-                            <input type="text" class="form-control my-outline-gray text-center" data-product-id="<?php echo htmlspecialchars((int)$shoppingCartProductId) ?>" placeholder="" max="<?php  echo htmlspecialchars((int)$shoppingCartProductQuantity); ?>" value="<?php  echo htmlspecialchars($shoppingCartQuantity); ?>">
-                            <button class="btn btn-primary quantityUp" id="quantityUp" data-product-id="<?php echo htmlspecialchars((int)$shoppingCartProductId) ?>" type="button">+</button>
-                        </div>
-                        <p class="card-text mb-3"><small class="text-body-secondary">200 disponibles</small></p>
-                        <a href="#" class="btn my-primary w-100 mb-3">Agregar al carrito</a>
+                        <form action="index.php?controller=shoppingCart&action=addproduct" method="POST">
+                            <div class="input-group">
+                                <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($productId) ?>">
+                                <label for="quantity">Cantidad que desea agregar al carrito:</label>
+                                <input type="number" id="quantity" name="quantity" class="form-control my-outline-gray text-center" placeholder="" max="<?php  echo htmlspecialchars((int)$productQuantity); ?>" value="1">
+                            </div>
+                            <p class="card-text mb-3"><small class="text-body-secondary"><?php echo htmlspecialchars($productQuantity) ?> disponibles</small></p>
+                            <button type="submit" class="btn my-primary w-100 mb-3" data-product-id="<?php echo htmlspecialchars($productId) ?>">Agregar al carrito</button>
+                        </form>
                     </div>
                 </div>
             </div>

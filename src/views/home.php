@@ -36,7 +36,7 @@
                                 $productPrice = $product['price'];
                                 $productQuotable = $product['quotable'];
                                 $rating = $product['average_rating'];
-                                $review_count = 1;
+                                //$review_count = 1;
                             }
                             include __DIR__ . '/layouts/product_template.php';
                         }

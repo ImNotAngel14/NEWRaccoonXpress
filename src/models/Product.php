@@ -49,6 +49,33 @@ class Product
         $this->average_rating = $average_rating;
     }
 
+    public function getProduct($productId)
+    {
+        $sql = "SELECT * FROM `product_overview` WHERE `product_id` = ?;";
+        $database = new Database();
+        try
+        {
+            $this->conn = $database->connect();
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("i", $productId);
+            $stmt->execute();
+            if ($stmt->error) {
+                return null;
+            }
+            $result = $stmt->get_result();
+            if($result->num_rows > 0)
+            {
+                $row = $result->fetch_assoc();
+                return $row;
+            }
+        }
+        catch(mysqli_sql_exception $e)
+        {
+            echo "Error al obtener los datos: " . $e->getMessage();
+            error_log($e . "\r\n", 3, "../logs/error_logs.log");
+        }
+    }
+
     public function getAllProducts()
     {        
         $sql = "SELECT `product_id`, `product_name`, `description`, `quotable`, `price`, `price`, `quantity`, `active`, `approved_by`, `average_rating`, `image_1` FROM `product_overview`;";

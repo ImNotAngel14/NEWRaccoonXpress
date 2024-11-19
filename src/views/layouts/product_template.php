@@ -1,6 +1,6 @@
 <div class='col d-inline-flex justify-content-center'>
     <div class='card' style='width: 18rem;'>
-        <a href='product.php?product=<?php echo htmlspecialchars($productId); ?>' style='color: black; text-decoration: none;'>
+        <a href='index.php?controller=product&action=productDetails&product=<?php echo htmlspecialchars($productId); ?>' style='color: black; text-decoration: none;'>
             <!-- Image -->
             <img src='<?php echo htmlspecialchars($productImage);?>' class='card-img-top' alt='' style='height: 18rem; object-fit: contain; image-rendering: pixelated;'>
 
@@ -12,7 +12,7 @@
                 <div class='rate-container'>
                     <!-- Rating -->
                     <?php
-                        if($review_count > 0)
+                        if($rating > 0)
                         {
                             for($i = 0; $i < 5; $i++)
                             {
@@ -26,7 +26,7 @@
                                     echo "<i class='bi bi-star'></i>";
                                 }
                             }
-                            echo "<p class='card-text'><small class='text-body-secondary'>(" . $review_count . ")</small></p>";
+                            // echo "<p class='card-text'><small class='text-body-secondary'>(" . $review_count . ")</small></p>";
                         }
                         else
                         {

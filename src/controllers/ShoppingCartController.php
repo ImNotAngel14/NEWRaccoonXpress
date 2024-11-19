@@ -15,6 +15,14 @@
             require "src/views/shoppingCart.php";
         }
 
+        public function CleanUserShoppingCart()
+        {
+            $userId = (int)$_SESSION['user'];
+            $shoppingCartModel = new ShoppingCartModel();
+            $shoppingCartModel->cleanShoppingCart($userId);
+            header("Location: index.php?controller=shoppingCart&action=ShowShoppingCart");
+        }
+
         public function addProduct()
         {
             $productId = (int)$_POST['product_id'];

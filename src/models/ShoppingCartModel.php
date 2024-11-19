@@ -22,6 +22,24 @@
             $this->userId = $userId;
         }
 
+        public function cleanShoppingCart($userId)
+        {
+            $sql = "DELETE FROM `shopping_carts` WHERE `user_id` = ?;";
+            $database = new Database();
+            $this->conn = $database->connect();
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param
+            (
+                "i",
+                $userId
+            );
+            $stmt->execute();
+            if ($stmt->error) {
+                return false;
+            }
+            return true;
+        }
+
         public function removeShoppingCartItem($userId, $productId)
         {
             $sql = "CALL `sp_shopping_cart_management`(?, ?, 0, 3);";

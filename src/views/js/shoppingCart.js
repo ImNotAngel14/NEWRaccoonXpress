@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cartContainer.addEventListener("click", (event) => {
         if (event.target.classList.contains("quantityUp") || event.target.classList.contains("quantityDown")) {
             const productId = event.target.getAttribute("data-product-id");
-
-            console.log("Producto clickeado:", productId);
             var operation = 1;
             if(event.target.classList.contains("quantityUp"))
             {
@@ -29,11 +27,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (result.success) {
                         if (input) 
                         {
+                            location.reload();
+                            /*
+                            const itemSubtotal = document.querySelector(`h5[data-product-id="${productId}"]`);
+                            let oldSubtotal = parseFloat(itemSubtotal.textContent)/parseInt(input.value);
                             input.value = operation ? parseInt(input.value) + 1 : parseInt(input.value) - 1;
+                            
+                            let newSubtotal = parseInt(input.value) * oldSubtotal;
+                            itemSubtotal.textContent = newSubtotal.toFixed(2);
+                            //itemSubtotal.textContent="$${newSubtotal.toFixed(2)}"
                             if(input.value == 0)
                             {
                                 location.reload();
                             }
+                            */
                         }
                         else
                         {

@@ -21,7 +21,7 @@
         <!-- Subtotal -->
         <div class="col-md-2 d-flex align-items-center justify-content-center p-4">
             <div class="d-flex align-items-center">
-                <h5>$<?php  echo htmlspecialchars((float)$shoppingCartPrice * (int)$shoppingCartQuantity); ?></h5>
+                <h5>$<h5 data-product-id="<?php echo htmlspecialchars((int)$shoppingCartProductId) ?>"><?php  echo htmlspecialchars((float)$shoppingCartPrice * (int)$shoppingCartQuantity); ?></h5></h5>
             </div>
         </div>
     </div>

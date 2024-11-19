@@ -89,8 +89,9 @@
             onApprove: function(data, actions){
                 actions.order.capture().then(function(detalles){
                     //esto imprime los detalles d la orden d paypal en la consola
-                    console.log(detalles);
-                    alert('logrado');
+                    //console.log(detalles);
+                    window.location.href="index.php?controller=shoppingCart&action=cleanUserShoppingCart";
+                    //alert('logrado');
                     //aquí podrías agregar un 
                     // window.location.href="ventana.html"
                 })

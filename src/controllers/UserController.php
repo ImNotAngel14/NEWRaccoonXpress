@@ -3,6 +3,12 @@
     class UserController
     {
         private $userModel = null;
+
+        public function ShowMyPurchases()
+        {
+            require "src/views/my_purchases.php";
+        }
+
         public function ShowLogin()
         {
             require "src/views/login.php";

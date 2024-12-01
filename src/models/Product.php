@@ -57,7 +57,7 @@ class Product
             $this->conn = $database->connect();
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param(
-                "ssifiissss",
+                "ssidiissss",
                 $product_name,
                 $description,
                 $quotable,
@@ -77,7 +77,7 @@ class Product
         }
         catch(mysqli_sql_exception $e)
         {
-            error_log($e . "\r\n", 3, "../logs/error_logs.log");
+            error_log($e . "\r\n", 3, $_SERVER['DOCUMENT_ROOT'] . "/NEWRaccoonXpress/logs/error_logs.log");
             return false;
         }
         

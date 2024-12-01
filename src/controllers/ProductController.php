@@ -18,7 +18,10 @@
             $price = isset($_POST['price']) ? (float)$_POST['price'] : 0.0;
             $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 0;
             $category_id = $_POST['category'];
-
+            $imageData = NULL;
+            $imageData2 = NULL;
+            $imageData3 = NULL;
+            $video = NULL;
             if(isset($_FILES['image_1']) && $_FILES['image_1']['error'] === UPLOAD_ERR_OK)
             {
                 $fileTmpPath = $_FILES['image_1']['tmp_name'];

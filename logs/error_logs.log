@@ -3,3 +3,10 @@ Stack trace:
 #0 D:\xampp\htdocs\NEWRaccoonXpress\src\models\User.php(150): mysqli_stmt->execute()
 #1 D:\xampp\htdocs\NEWRaccoonXpress\api\usersAPI.php(53): User->update()
 #2 {main}
+mysqli_sql_exception: Column 'image_1' cannot be null in D:\xampp\htdocs\NEWRaccoonXpress\src\models\Product.php:72
+Stack trace:
+#0 D:\xampp\htdocs\NEWRaccoonXpress\src\models\Product.php(72): mysqli_stmt->execute()
+#1 D:\xampp\htdocs\NEWRaccoonXpress\src\controllers\ProductController.php(52): Product->createProduct(3, 'Juguete', 'Descripcion', true, 12.99, 123, '1', NULL, NULL, NULL, NULL)
+#2 D:\xampp\htdocs\NEWRaccoonXpress\router.php(25): ProductController->AddProduct()
+#3 D:\xampp\htdocs\NEWRaccoonXpress\index.php(8): Router::route('product', 'AddProduct')
+#4 {main}

@@ -7,59 +7,60 @@
     <title>Carrito de compras</title>
 </head>
 <body>
-    <?php
-        include __DIR__ . '/layouts/navbar.php';
-    ?>
-    <div class="container p-4">
-        <!-- Content -->
-        <div class="row justify-content-center w-100 h-90 p-4" >
-            <div class="col-md-8" id="cart-items">
-                <!-- Shopping Cart Item -->
-                <?php
-                    $subtotal = 0.0;
-                    if($shoppingCartItems)
+    <div class="container-fluid d-flex flex-column w-100 vh-100">    
+        <div class="row">
+            <?php
+                include __DIR__ . '/layouts/navbar.php';
+            ?>
+        </div>
+    <!-- Content -->
+    <div class="row justify-content-center w-100 flex-grow-1 p-4" >
+        <div class="col-md-8" id="cart-items">
+            <!-- Shopping Cart Item -->
+            <?php
+                $subtotal = 0.0;
+                if($shoppingCartItems)
+                {
+                    foreach($shoppingCartItems as $shoppingCartItem)
                     {
-                        foreach($shoppingCartItems as $shoppingCartItem)
+                        $shoppingCartProductId = $shoppingCartItem['product_id'];
+                        $shoppingCartProductName = $shoppingCartItem['product_name'];
+                        $shoppingCartPrice = $shoppingCartItem['price'];
+                        $shoppingCartProductQuantity = $shoppingCartItem['product_quantity'];
+                        $shoppingCartQuantity = $shoppingCartItem['cart_quantity'];
+                        if(isset($shoppingCartItem['image_1']))
                         {
-                            $shoppingCartProductId = $shoppingCartItem['product_id'];
-                            $shoppingCartProductName = $shoppingCartItem['product_name'];
-                            $shoppingCartPrice = $shoppingCartItem['price'];
-                            $shoppingCartProductQuantity = $shoppingCartItem['product_quantity'];
-                            $shoppingCartQuantity = $shoppingCartItem['cart_quantity'];
-                            if(isset($shoppingCartItem['image_1']))
-                            {
-                                $shoppingCartProductImage = "data:image/png;base64," . base64_encode($shoppingCartItem['image_1']);
-                            }
-                            else
-                            {
-                                $shoppingCartProductImage = "/NewRaccoonXpress/src/views/assets/no-profile-user.png";
-                            }
-                            $subtotal += $shoppingCartPrice * $shoppingCartQuantity;
-                            include __DIR__ . '/layouts/list_item_template.php';
-                        }  
-                    }
-                ?>
-            </div>
-            <!-- Purchase form -->
-            <div class="col-md-4 d-flex justify-content-center align-items-start">
-                <form action="">
-                    <div class="card text-center mb-3" style="width: 18rem;">
-                        <div class="card-header">Resumen de compra</div>
-                        <div class="card-body text-start">
-                            <p class="card-text mb-5">Productos: $<?php echo htmlspecialchars((float)$subtotal)?></p>
-                            <h5 class="card-title mb-2">Total: $<?php echo htmlspecialchars((float)$subtotal)?></h5>
-                            <div id="paypal-button-container">
-    
-                            <!-- CUENTA CON LA QUE VAS A PAGAR
-                            correo: sb-tudqr34176614@personal.example.com
-                            contraseña: U-)l^1Bp 
-                            -->
-                            </div>
-                            <a href="#" class="btn w-100 my-primary">Procesar pago</a>
+                            $shoppingCartProductImage = "data:image/png;base64," . base64_encode($shoppingCartItem['image_1']);
+                        }
+                        else
+                        {
+                            $shoppingCartProductImage = "/NewRaccoonXpress/src/views/assets/no-profile-user.png";
+                        }
+                        $subtotal += $shoppingCartPrice * $shoppingCartQuantity;
+                        include __DIR__ . '/layouts/list_item_template.php';
+                    }  
+                }
+            ?>
+        </div>
+        <!-- Purchase form -->
+        <div class="col-md-4 d-flex justify-content-center align-items-start">
+            <form action="">
+                <div class="card text-center mb-3" style="width: 18rem;">
+                    <div class="card-header">Resumen de compra</div>
+                    <div class="card-body text-start">
+                        <p class="card-text mb-5">Productos: $<?php echo htmlspecialchars((float)$subtotal)?></p>
+                        <h5 class="card-title mb-2">Total: $<?php echo htmlspecialchars((float)$subtotal)?></h5>
+                        <div id="paypal-button-container">
+
+                        <!-- CUENTA CON LA QUE VAS A PAGAR
+                        correo: sb-tudqr34176614@personal.example.com
+                        contraseña: U-)l^1Bp 
+                        -->
                         </div>
+                        <a href="#" class="btn w-100 my-primary">Procesar pago</a>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
     <script src="https://sandbox.paypal.com/sdk/js?client-id=AS8FGIVzuXuOApzFjZuMOrjoX5ddiqNCWQHjmKKCpbWyyzQxQhWlFApmdbgVjtIEj8B14IXa-GEGtckd&currency=MXN"></script>

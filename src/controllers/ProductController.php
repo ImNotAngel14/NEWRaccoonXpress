@@ -6,6 +6,12 @@
     {
         private $productModel = null;
 
+        public function ProductActivationView()
+        {
+            // obtener los productos que faltan de activar
+            require "src/views/product_activation.php";
+        }
+
         public function AddProduct()
         {
             if (session_status() === PHP_SESSION_NONE) {
@@ -14,7 +20,7 @@
             $user_id = $_SESSION['user'];
             $product_name = $_POST['product_name'];
             $description = $_POST['description'];
-            $quotable = isset($_POST['quotable']);
+            $quotable = isset($_POST['quotable']) ? (int)$_POST['quotable'] : 0;
             $price = isset($_POST['price']) ? (float)$_POST['price'] : 0.0;
             $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 0;
             $category_id = $_POST['category'];
@@ -50,8 +56,6 @@
 
             
             $success = $productModel->createProduct($user_id, $product_name, $description, $quotable, $price, $quantity, $category_id, $imageData, $imageData2, $imageData3, $video);
-            echo json_encode(['success' => $success]);
-            exit;
             if($success)
             {
                 //header("Location: index.php?controller=product&action=GetProductsByUser");
@@ -60,6 +64,8 @@
             {
 
             }
+            echo json_encode(['s'=>$success]);
+            exit;
         }
 
         public function ShowAddProductView()
@@ -71,12 +77,63 @@
 
         public function DeleteProduct()
         {
-
+            $success = false;
+            if(isset($_POST['product_id']))
+            {
+                $product_id = $_POST['product_id'];
+                $product = new Product();
+                $success = $product->deleteProduct($product_id);
+            }
+            else
+            {
+                echo json_encode(['success' => $success, 'message' => "No se recibió el id del producto a eliminar."]);
+                exit;
+            }
+            echo json_encode(['success' => $success]);
+            exit;
         }
 
         public function UpdateProduct()
         {
-
+            $success = false;
+            $product_id = (int)$_POST['product_id'];
+            $product_name = $_POST['product_name'];
+            $description = $_POST['description'];
+            $quotable = isset($_POST['quotable']) ? (int)$_POST['quotable'] : 0;
+            $price = isset($_POST['price']) ? (float)$_POST['price'] : 0.0;
+            $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 0;
+            $category_id = (int)$_POST['category'];
+            $imageData = NULL;
+            $imageData2 = NULL;
+            $imageData3 = NULL;
+            $video = NULL;
+            if(isset($_FILES['image_1']) && $_FILES['image_1']['error'] === UPLOAD_ERR_OK)
+            {
+                $fileTmpPath = $_FILES['image_1']['tmp_name'];
+                $imageData = file_get_contents($fileTmpPath);
+            }
+            
+            if(isset($_FILES['image_2']) && $_FILES['image_2']['error'] === UPLOAD_ERR_OK)
+            {
+                $fileTmpPath = $_FILES['image_2']['tmp_name'];
+                $imageData2 = file_get_contents($fileTmpPath);
+            }
+            
+            if(isset($_FILES['image_3']) && $_FILES['image_3']['error'] === UPLOAD_ERR_OK)
+            {
+                $fileTmpPath = $_FILES['image_3']['tmp_name'];
+                $imageData3 = file_get_contents($fileTmpPath);
+            }
+            
+            if(isset($_FILES['video']) && $_FILES['video']['error'] === UPLOAD_ERR_OK)
+            {
+                $fileTmpPath = $_FILES['video']['tmp_name'];
+                $video = file_get_contents($fileTmpPath);
+            }
+            $product = new Product();
+            $success = $product->updateProduct($product_id, $product_name, $description, $quotable, $price, $quantity, $category_id, $imageData, $imageData2, $imageData3, $video);
+            echo json_encode(['success' => $success]);
+            exit;
         }
 
         public function GetProductsByUser()

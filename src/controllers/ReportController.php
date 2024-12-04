@@ -3,7 +3,7 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . "/NEWRaccoonXpress/src/controllers/CategoryController.php";
     class ReportController
     {
-        public function salesReport() {
+        public function SalesReport() {
             // Lógica para generar el reporte de ventas
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
@@ -59,7 +59,7 @@
             require "src/views/sales_report.php";
         }
     
-        public function userOrders() {
+        public function UserOrders() {
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }

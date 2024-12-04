@@ -1,4 +1,7 @@
 <?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     $user_role = $_SESSION['role'];
     $nav_buttons = ""; // Inicializar variable vacía para almacenar los botones
 
@@ -6,10 +9,7 @@
         case 0: // Administrator
             $nav_buttons = '
                 <li class="nav-item d-flex justify-content-center">
-                    <a class="nav-link" href="#">Gestionar usuarios</a>
-                </li>
-                <li class="nav-item d-flex justify-content-center">
-                    <a class="nav-link" href="#">Autorizar productos</a>
+                    <a class="nav-link" href="index.php?controller=product&action=productActivationView">Autorizar productos</a>
                 </li>';
             break;
         case 1: // Seller
@@ -18,7 +18,7 @@
                     <a class="nav-link" href="#">Mis productos</a>
                 </li>
                 <li class="nav-item d-flex justify-content-center">
-                    <a class="nav-link" href="#">Consultas de ventas</a>
+                    <a class="nav-link" href="index.php?controller=report&action=salesReport">Consultas de ventas</a>
                 </li>';
             break;
         case 2: // Buyer
@@ -30,7 +30,7 @@
                     <a class="nav-link" href="#">Mis listas</a>
                 </li>
                 <li class="nav-item d-flex justify-content-center d-none d-lg-block">
-                    <a class="nav-link" href="#"><i class="bi bi-bell"></i></a>
+                    <a class="nav-link" href="#"><i class="bi bi-message"></i></a>
                 </li>
                 <li class="nav-item d-flex justify-content-center d-none d-lg-block">
                     <a class="nav-link" href="index.php?controller=shoppingCart&action=showShoppingCart"><i class="bi bi-cart"></i></a>
@@ -93,7 +93,7 @@
                     <!-- Profile -->
                     <li class="nav-item dropdown d-flex justify-content-center d-none d-lg-block">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <!--img src="<?php echo $profileImage ?>" alt="Profile" class="m-2 container-fluid" style='height: 2rem; object-fit: contain; border-radius: 50%; image-rendering: pixelated;"'-->
+                            <!--img src="<?php //echo $profileImage ?>" alt="Profile" class="m-2 container-fluid" style='height: 2rem; object-fit: contain; border-radius: 50%; image-rendering: pixelated;"'-->
                             <?php //echo htmlspecialchars($username); 
                             echo "Perfil"; ?>
                         </a>

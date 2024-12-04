@@ -36,9 +36,10 @@
                                 $productPrice = $product['price'];
                                 $productQuotable = $product['quotable'];
                                 $rating = $product['average_rating'];
+                                include __DIR__ . '/layouts/product_template.php';
                                 //$review_count = 1;
                             }
-                            include __DIR__ . '/layouts/product_template.php';
+                            
                         }
                         
                     ?>

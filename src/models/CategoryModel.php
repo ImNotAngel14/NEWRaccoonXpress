@@ -49,5 +49,31 @@
                 return $categories;
             }
         }
+
+        public function createCategory($created_by, $title)
+        {
+            //INSERT INTO `categories`(`category_id`, `title`, `description`, `creation_date`, `created_by`, `active`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]','[value-6]')
+            $sql = "INSERT INTO `categories`(`title`, `created_by`) VALUES (?,?);";
+            $database = new Database();
+            try{
+                $this->conn = $database->connect();
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param(
+                    "si",
+                    $title,
+                    $created_by
+                );
+                $stmt->execute();
+                if ($stmt->error) {
+                    return false;
+                }
+                return true;
+            }
+            catch(mysqli_sql_exception $e)
+            {
+                error_log($e . "\r\n", 3, $_SERVER['DOCUMENT_ROOT'] . "/NEWRaccoonXpress/logs/error_logs.log");
+                return false;
+            }
+        }
     }
 ?>

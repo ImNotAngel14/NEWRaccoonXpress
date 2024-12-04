@@ -7,12 +7,13 @@
     <title>Perfil</title>
 </head>
 <body>
-    <?php
-    include __DIR__ . '/layouts/navbar.php';
-    ?>
-    <div class="container-fluid d-flex justify-content-center">
-        <!-- Content -->
-        <div class="row justify-content-start align-items-center w-100 h-90 p-4">
+    <div class="container-fluid d-flex flex-column w-100 vh-100">    
+        <div class="row">
+            <?php
+                include __DIR__ . '/layouts/navbar.php';
+            ?>
+        </div>
+        <div class="row justify-content-start align-items-center w-100 flex-grow-1 p-4">
             <div class="col-3 d-flex justify-content-center " >
                 <div class="card flex-fill">
                     <div class="card-body p-5">
@@ -22,7 +23,7 @@
                                 <i class="bi bi-pencil-square"></i>
                             </button>
                         </div>
-                        <img id="profile_image" class="container-fluid img-fluid p-5 text-center " src="<?php echo $profileImage ?>" alt="" style='height:30rem; width:30rem; border-radius: 50%; image-rendering: pixelated;'>
+                        <img id="profile_image" class="d-flex justify-content-center container-fluid img-fluid p-5 text-center " src="<?php echo $profileImage ?>" alt="" style='width:30vh; border-radius: 50%; image-rendering: pixelated;'>
                         <h5 class="card-subtitle mb-4 text-body-secondary text-center "><?php echo htmlspecialchars($role); ?></h5>
                         <p class="card-text text-start <?php if(!$email)    {echo "d-none";}  ?>"><b>Correo : </b><?php echo htmlspecialchars($email); ?></p>
                         <p class="card-text text-start <?php if(!$firstname){echo "d-none";}  ?>"><b>Nombre completo : </b><?php echo htmlspecialchars($firstname . " " . $lastname); ?></p>
@@ -39,7 +40,6 @@
 
             </div>
         </div>
-    </div>
     <!-- Update Profile Modal -->
     <div class="modal fade" id="ModalUpdateAccount"  tabindex="-1" aria-labelledby="ModalmodifieLabel" aria-hidden="true">
         <div class="modal-dialog">

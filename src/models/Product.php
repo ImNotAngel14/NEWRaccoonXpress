@@ -49,15 +49,73 @@ class Product
         $this->average_rating = $average_rating;
     }
 
-    public function createProduct($user_id, $product_name, $description, $quotable, $price, $quantity, $category_id, $imageData, $imageData2, $imageData3, $video)
+    public function updateProduct($product_id, $product_name, $description, $quotable, $price, $quantity, $category_id, $imageData, $imageData2, $imageData3, $video)
     {
-        $sql = "INSERT INTO `products`(`product_name`,`description`,`quotable`,`price`,`quantity`,`created_by`,`image_1`,`image_2`,`image_3`,`video`) VALUES (?,?,?,?,?,?,?,?,?,?);";
+        $sql = "CALL `sp_update_product`(?,?,?,?,?,?,?,?,?,?);";
+        //$sql = "UPDATE `products` SET `product_name`=?,`description`=?,`quotable`=?,`price`=?,`quantity`=?, `image_1`=?,`image_2`=?,`image_3`=?,`video`=? WHERE `product_id` = ?;";
         $database = new Database();
         try{
             $this->conn = $database->connect();
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param(
-                "ssidiissss",
+                "issidissss",
+                $product_id,
+                $product_name,
+                $description,
+                $quotable,
+                $price,
+                $quantity,
+                $imageData,
+                $imageData2,
+                $imageData3,
+                $video
+            );
+            $stmt->execute();
+            if ($stmt->error) {
+                return false;
+            }
+            return true;
+        }
+        catch(mysqli_sql_exception $e)
+        {
+            error_log($e . "\r\n", 3, $_SERVER['DOCUMENT_ROOT'] . "/NEWRaccoonXpress/logs/error_logs.log");
+            return false;
+        }
+    }
+
+    public function deleteProduct($product_id)
+    {
+        $sql = "UPDATE `products` SET `active` = -1 WHERE `product_id` = ?;";
+        $database = new Database();
+        try{
+            $this->conn = $database->connect();
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param(
+                "i",
+                $product_id
+            );
+            $stmt->execute();
+            if ($stmt->error) {
+                return false;
+            }
+            return true;
+        }
+        catch(mysqli_sql_exception $e)
+        {
+            error_log($e . "\r\n", 3, $_SERVER['DOCUMENT_ROOT'] . "/NEWRaccoonXpress/logs/error_logs.log");
+            return false;
+        }
+    }
+
+    public function createProduct($user_id, $product_name, $description, $quotable, $price, $quantity, $category_id, $imageData, $imageData2, $imageData3, $video)
+    {
+        $sql = "INSERT INTO `products`(`product_name`,`description`,`quotable`,`price`,`quantity`,`created_by`,`image_1`,`image_2`,`image_3`,`video`, category_id) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+        $database = new Database();
+        try{
+            $this->conn = $database->connect();
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param(
+                "ssidiissssi",
                 $product_name,
                 $description,
                 $quotable,
@@ -67,7 +125,8 @@ class Product
                 $imageData,
                 $imageData2,
                 $imageData3,
-                $video
+                $video,
+                $category_id
             );
             $stmt->execute();
             if ($stmt->error) {

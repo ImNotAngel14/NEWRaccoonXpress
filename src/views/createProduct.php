@@ -69,6 +69,7 @@
                                     } 
                                 ?>
                             </select>
+                            <button id='id_delete_account' class='btn my-secondary m-2' data-bs-toggle='modal' data-bs-target='#modal_create_category'>Crear categoria</button>
 
                             <!-- image_1 -->
                             <div class="mb-3">
@@ -103,6 +104,33 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modal_create_category"  tabindex="-1" aria-labelledby="ModalmodifieLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crear categoria</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="card">
+                    <div class="card-body m-4">
+                        <form method="POST" id="add_category" action="index.php?controller=category&action=create" >
+
+                            <!-- category_name -->
+                            <div class="form-outline mb-3">
+                                <label for="category_name" class="form-label">Nombre de la categoría:</label>
+                                <input type="text" class="form-control p-2" id="category_title" name="category_title" placeholder="Titulo de la categoria" required/>
+                                <div class="invalid-feedback">Ingrese el nombre de la categoría.</div>
+                            </div>
+
+                            <div class="text-center mb-3">
+                                <button type="submit" class="btn w-100 my-primary">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         // Selecciona el checkbox y los contenedores de los campos
@@ -123,6 +151,11 @@
             }
         });
 
+        const modal_form = document.getElementById('add_category');
+        form.addEventListener('submit', async function(event){
+            event.preventDefault();
+        });
+
         const form = document.getElementById('add_product');
         form.addEventListener('submit', async function(event) {
             event.preventDefault();
@@ -140,8 +173,7 @@
                     console.log(result);
                     if (result.success) 
                     {
-                        alert('registrado');
-                        //location.reload();
+                        
                     } 
                     else 
                     {
